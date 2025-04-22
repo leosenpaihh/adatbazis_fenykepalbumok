@@ -64,6 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
+    $admin = 0;
     $titkositott_jelszo = password_hash($jelszo, PASSWORD_BCRYPT);
 
     $sql = "INSERT INTO FELHASZNALO (vezeteknev, keresztnev, felhasznalonev, email, admin, telepules_id, jelszo) 
@@ -74,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     oci_bind_by_name($stid, ':keresztnev', $keresztnev);
     oci_bind_by_name($stid, ':felhasznalonev', $felhasznalonev);
     oci_bind_by_name($stid, ':email', $email);
-    oci_bind_by_name($stid, ':admin', 0);
+    oci_bind_by_name($stid, ':admin', $admin);
     oci_bind_by_name($stid, ':telepules', $telepules);
     oci_bind_by_name($stid, ':jelszo', $titkositott_jelszo);
 

@@ -19,28 +19,27 @@ if (isset($_SESSION['message'])) {
 }
 ?>
 
-    <!DOCTYPE html>
-    <html lang="hu">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Település hozzáadása</title>
-    </head>
-    <body>
-    <h1>Település hozzáadása</h1>
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Település hozzáadása</title>
+</head>
+<body>
+<h1>Település hozzáadása</h1>
 
-    <form action="../controllers/location_handler.php" method="post">
-        <label for="orszag">Ország:</label><br>
-        <input type="text" id="orszag" name="orszag" required maxlength="100"><br>
+<form action="../controllers/location_handler.php" method="post">
+    <label for="orszag">Ország:</label><br>
+    <input type="text" id="orszag" name="orszag" required maxlength="100"><br>
 
-        <label for="megye">Megye:</label><br>
-        <input type="text" id="megye" name="megye" required maxlength="100"><br>
+    <label for="megye">Megye:</label><br>
+    <input type="text" id="megye" name="megye" required maxlength="100"><br>
 
-        <label for="telepules">Település:</label><br>
-        <input type="text" id="telepules" name="telepules" required maxlength="100"><br>
+    <label for="telepules">Település:</label><br>
+    <input type="text" id="telepules" name="telepules" required maxlength="100"><br>
 
-        <input type="submit" value="Helyszín hozzáadása">
-    </form>
-    </body>
-    </html>
-<?php
+    <input type="submit" value="Helyszín hozzáadása">
+</form>
+</body>
+</html>

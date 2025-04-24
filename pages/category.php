@@ -33,7 +33,7 @@ while ($row = oci_fetch_assoc($stid)) {
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script type="text/javascript" src="category.js"></script>
+    <script type="text/javascript" src="shared/modify.js"></script>
     <title>Kategória létrehozása</title>
 </head>
 <body>
@@ -60,7 +60,7 @@ while ($row = oci_fetch_assoc($stid)) {
                 <tr>
                     <td><?= htmlspecialchars($kategoria['NEV']) ?></td>
                     <td>
-                        <button onclick='modifyCategory(<?= json_encode($kategoria["NEV"]) ?>)'>
+                        <button onclick='modify(<?= json_encode($kategoria["NEV"]) ?>, "modositas_nev", "eredeti_nev")'>
                             Módosítás
                         </button>
                     </td>

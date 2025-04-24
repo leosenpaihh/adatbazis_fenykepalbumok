@@ -18,6 +18,8 @@ if (isset($_SESSION['message'])) {
     unset($_SESSION['message']);
 }
 
+$kategoriak = [];
+
 $stid = oci_parse($conn, "SELECT * FROM KATEGORIA");
 oci_execute($stid);
 while ($row = oci_fetch_assoc($stid)) {

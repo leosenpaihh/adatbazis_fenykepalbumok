@@ -151,7 +151,19 @@ while ($row = oci_fetch_array($stidKategoria, OCI_ASSOC)) {
                     <p><strong>Feltöltési dátum:</strong> <?= htmlspecialchars($img['FELTOLTESI_DATUM']) ?></p>
                     <p><strong>Település:</strong> <?= htmlspecialchars($img['TELEPULES_NEV'] ?? 'Nincs település hozzárendelve') ?></p>
                     <p><strong>Kategóriák:</strong> <?= htmlspecialchars($img['KATEGORIANK']) ?></p>
-                    <p><strong>Leírás:</strong> <?= nl2br(htmlspecialchars($img['LEIRAS'])) ?></p>
+                    <p><strong>Leírás:</strong>
+                        <?php
+                        $maxLength = 100;
+                        $leiras = htmlspecialchars($img['LEIRAS']);
+                        if (mb_strlen($leiras) > $maxLength) {
+                            $roviditett = mb_substr($leiras, 0, $maxLength) . '...';
+                            echo nl2br($roviditett);
+                            echo ' <a href="pages/photo_review.php?kep_id=' . urlencode($img['ID']) . '">Tovább</a>';
+                        } else {
+                            echo nl2br($leiras);
+                        }
+                        ?>
+                    </p>
                     <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
                         <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törölni szeretnéd a képet?');" class="location_torles">
                             <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">

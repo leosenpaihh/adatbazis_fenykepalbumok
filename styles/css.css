@@ -1,0 +1,279 @@
+/* Alap reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Test (body) stílus */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+}
+
+/* Navigációs menü */
+nav {
+    background-color: #333;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #007bff;
+}
+
+/* Fejléc (h1) stílus */
+h1 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+/* Alap űrlap stílus */
+form {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+/* Űrlapelemek stílusai */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Submit gomb */
+input[type="submit"] {
+    padding: 10px 15px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+input[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Üzenetek (például hiba vagy info) */
+p.message {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #eef;
+}
+
+/* Sidebar: teljesen a bal oldalon */
+.sidebar {
+    float: left;
+    width: 250px;
+    margin-right: 20px;
+}
+
+/* Dobozok a sidebar-ban */
+.box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.box h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+.box ul {
+    list-style: none;
+    padding-left: 0;
+}
+.box ul li {
+    padding: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.box ul li:last-child {
+    border-bottom: none;
+}
+
+/* Linkek a sidebar-ban */
+.box ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1em;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.box ul li a:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.box ul li a:active {
+    background-color: #0056b3;
+
+}
+a.active {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Gallery container: az egész galéria konténer, mely eltolva van a sidebar szélességével */
+.gallery-container {
+    margin-left: 270px; /* 250px (sidebar) + 20px gap */
+}
+
+/* Galéria rács - 3 oszlopos elrendezés */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* Galéria elem */
+.gallery-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+.gallery-item img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+.gallery-item .metadata {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.9em;
+}
+.gallery-item .metadata p {
+    margin: 5px 0;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+}
+footer p {
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Univerzális gombstílus */
+button,
+input[type="button"],
+input[type="submit"] {
+    padding: 10px 15px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover állapot */
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Aktív (kattintás) állapot */
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active {
+    background-color: #222;
+}
+
+/* Legördülő menü (select) */
+select {
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #333;
+    -webkit-appearance: none; /* Chrome, Safari, Opera */
+    -moz-appearance: none; /* Firefox */
+    appearance: none; /* Modern böngészők */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L5 6L10 0H0Z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 6px;
+}
+
+select:focus {
+    outline: none;
+    border-color: #333;
+}
+
+/* Profil kártya - kompaktabb elrendezés */
+.profile-card {
+    background-color: #fff;
+    max-width: 100%;
+    width: 100%;
+    margin: 20px auto;      /* kevesebb üres tér a felett és alatta */
+    padding: 15px 20px;     /* csökkentett belső tér */
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Cím stílus - kicsit kisebb margó */
+.profile-card h1 {
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 1.6em;
+    color: #222;
+}
+
+/* Paragrafusok - kisebb távolság */
+.profile-card p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.profile-card p strong {
+    color: #333;
+}

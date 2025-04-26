@@ -27,7 +27,7 @@ if (isset($_SESSION['message'])) {
     <meta charset="UTF-8">
     <title>Album létrehozása</title>
     <base href="http://localhost/adatbazis_fenykepalbumok/">
-
+    <link rel="icon" href="../styles/favicon.ico" type="image/ico">
 </head>
 <body>
 <?php
@@ -42,18 +42,27 @@ $kep_lekerdezes = oci_parse($conn,
 oci_bind_by_name($kep_lekerdezes, ":fnev", $felhasznalonev);
 oci_execute($kep_lekerdezes);
 ?>
-<h1>Album létrehozása</h1>
 
-<form action="controllers/album_handler.php" method="post">
-    <input type="text" name="nev" placeholder="Album neve" required maxlength="255"><br>
-    <textarea name="leiras" placeholder="Album leírása"></textarea><br>
+<div class="page-container">
+    <div class="wrapper">
+        <h1>Album létrehozása</h1>
 
-    <label for="kepek[]">Válassz képeket az albumhoz:</label><br>
-    <?php while ($row = oci_fetch_assoc($kep_lekerdezes)) : ?>
-        <input type="checkbox" name="kepek[]" value="<?= $row['ID'] ?>"> <?= htmlspecialchars($row['CIM']) ?><br>
-    <?php endwhile; ?>
+        <form action="controllers/album_handler.php" method="post">
+            <input type="text" name="nev" placeholder="Album neve" required maxlength="255"><br>
+            <textarea name="leiras" placeholder="Album leírása"></textarea><br>
 
-    <button type="submit" name="muv" value="letrehozas">Létrehozás</button>
-</form>
+            <label for="kepek[]">Válassz képeket az albumhoz:</label><br>
+            <?php while ($row = oci_fetch_assoc($kep_lekerdezes)) : ?>
+                <input type="checkbox" name="kepek[]" value="<?= $row['ID'] ?>"> <?= htmlspecialchars($row['CIM']) ?><br>
+            <?php endwhile; ?>
+
+            <button type="submit" name="muv" value="letrehozas">Létrehozás</button>
+        </form>
+
+    </div>
+    <footer>
+        <p>&copy; 2025 Fénykép Albumok. Minden jog fenntartva.</p>
+    </footer>
+</div>
 </body>
 </html>

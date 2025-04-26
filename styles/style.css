@@ -12,6 +12,7 @@ body {
     background-color: #f9f9f9;
     color: #333;
     padding: 20px;
+
 }
 
 /* Navigációs menü */
@@ -78,6 +79,20 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
+    background-color: #555;
+}
+
+.profile-button{
+    padding: 10px 15px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.profile-button:hover{
     background-color: #555;
 }
 
@@ -183,14 +198,28 @@ a.active {
     margin: 5px 0;
 }
 
-/* Footer */
+/* A page-container biztosítja, hogy a footer mindig alul legyen */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Minimum magasság a teljes viewport számára */
+}
+
+/* A wrapper nem fogja befolyásolni a footer pozícióját */
+.wrapper {
+    flex: 1; /* Az összes szabad helyet kitölti */
+}
+
+/* Footer fixálása az alján */
 footer {
     background-color: #333;
     color: #fff;
     padding: 10px;
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 0;
 }
+
 footer p {
     margin: 0;
     font-weight: bold;
@@ -337,3 +366,45 @@ select:focus {
     font-size: 24px;  /* Ikon méret */
     transition: color 0.3s;
 }
+
+
+.grid-container-xd {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+.user-card-statistics {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.2s;
+}
+.user-card-statistics:hover {
+    transform: translateY(-5px);
+}
+.user-card-statistics h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+}
+.user-card-statistics p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* A logó stílusa */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 100%; /* Igazítsd a kívánt méretre */
+    height: 100px;
+}
+

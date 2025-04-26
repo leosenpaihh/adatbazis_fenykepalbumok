@@ -21,7 +21,7 @@ unset($_SESSION['urlap_adatok']);
 <html lang="hu">
 <head>
     <link rel="stylesheet" href="../styles/style.css">
-
+    <link rel="icon" href="../styles/favicon.ico" type="image/ico">
     <meta charset="UTF-8">
     <title>Regisztráció</title>
     <base href="<?php echo BASE_URL; ?>">

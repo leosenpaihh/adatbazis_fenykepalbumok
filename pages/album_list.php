@@ -31,7 +31,7 @@ if (isset($_SESSION['hiba'])) {
 <html lang="hu">
 <head>
     <link rel="stylesheet" href="../styles/style.css">
-
+    <link rel="icon" href="../styles/favicon.ico" type="image/ico">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Albumok</title>
@@ -39,34 +39,43 @@ if (isset($_SESSION['hiba'])) {
 
 </head>
 <body>
-<h1>Albumok</h1>
 
-<table>
-    <tr>
-        <th>Album Cím</th>
-        <th>Leírás</th>
-        <th>Műveletek</th>
-    </tr>
-    <?php while ($row = oci_fetch_assoc($stid)): ?>
-        <tr>
-            <td><?= htmlspecialchars($row['NEV']) ?></td>
-            <td> <?php
-                $leiras = oci_lob_read($row['LEIRAS'], $row['LEIRAS']->size());
-                echo htmlspecialchars($leiras);
-                ?>
-            </td>
-            <td>
-                <a href="<?php echo BASE_URL; ?>pages/album_edit.php?album_id=<?= $row['ID'] ?>">Módosítás</a>
-                <form class="delete-form" action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post"
-                    onsubmit="
+<div class="page-container">
+    <div class="wrapper">
+        <h1>Albumok</h1>
+
+        <table>
+            <tr>
+                <th>Album Cím</th>
+                <th>Leírás</th>
+                <th>Műveletek</th>
+            </tr>
+            <?php while ($row = oci_fetch_assoc($stid)): ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['NEV']) ?></td>
+                    <td> <?php
+                        $leiras = oci_lob_read($row['LEIRAS'], $row['LEIRAS']->size());
+                        echo htmlspecialchars($leiras);
+                        ?>
+                    </td>
+                    <td>
+                        <a href="<?php echo BASE_URL; ?>pages/album_edit.php?album_id=<?= $row['ID'] ?>">Módosítás</a>
+                        <form class="delete-form" action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post"
+                              onsubmit="
                       return confirm('Biztosan törölni szeretnéd ezt az albumot? Ez a művelet nem visszavonható!');">
-                    <input type="hidden" name="album_id" value="<?= $row['ID'] ?>">
-                    <button type="submit" class="delete-btn">Törlés</button>
-                </form>
-            </td>
-        </tr>
-    <?php endwhile; ?>
-</table>
+                            <input type="hidden" name="album_id" value="<?= $row['ID'] ?>">
+                            <button type="submit" class="delete-btn">Törlés</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+
+    </div>
+    <footer>
+        <p>&copy; 2025 Fénykép Albumok. Minden jog fenntartva.</p>
+    </footer>
+</div>
 
 </body>
 </html>

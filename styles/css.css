@@ -277,3 +277,56 @@ select:focus {
 .profile-card p strong {
     color: #333;
 }
+
+
+/* Elrendezés – a kép, adatai és kommentek */
+.photo-review-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin: 20px;
+}
+.image-container {
+    flex: 1;
+    max-width: 500px;
+    text-align: center;
+    margin: 10px;
+}
+.image-info {
+    flex: 1;
+    padding-left: 20px;
+    border-left: 2px solid #ccc;
+    margin: 10px;
+}
+.image-container img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+}
+.image-info h2 { margin-top: 0; }
+.image-info p { margin: 10px 0; }
+/* Komment törlés link stílusa */
+.delete-comment {
+    float: right;
+    color: red;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+.delete-comment:hover { text-decoration: underline; }
+.comments-section { margin: 20px; }
+.comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+.comment p { margin: 5px 0; }
+.comment-form { margin: 20px; }
+
+
+.material-symbols-outlined {
+    cursor: pointer; /* Az ikonok kattinthatóak legyenek */
+    font-size: 24px;  /* Ikon méret */
+    transition: color 0.3s;
+}

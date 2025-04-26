@@ -4,26 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="Description of the image fixed">
-      <change afterPath="$PROJECT_DIR$/pages/admin_panel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/profile_created_albums.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/profile_upload_photos.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/statistics.php" afterDir="false" />
+    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="Statistic, Fixing Footer, Edited Profile Menu, Admin Panel, Icon/Banner">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/album_list_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/album_list_handler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/db.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/album.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/album_edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album_edit.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/album_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album_list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/location.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/location.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/photo.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/photo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/photo_review.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/photo_review.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/registration.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/registration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile_created_albums.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile_created_albums.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile_upload_photos.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile_upload_photos.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,7 +108,7 @@
       <workItem from="1745570834253" duration="566000" />
       <workItem from="1745571534170" duration="5396000" />
       <workItem from="1745578715521" duration="145000" />
-      <workItem from="1745580263109" duration="41552000" />
+      <workItem from="1745580263109" duration="48888000" />
     </task>
     <task id="LOCAL-00001" summary="Updating the main site and additional changes">
       <option name="closed" value="true" />
@@ -194,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745679995768</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Statistic, Fixing Footer, Edited Profile Menu, Admin Panel, Icon/Banner">
+      <option name="closed" value="true" />
+      <created>1745691909535</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745691909535</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,7 +234,8 @@
     <MESSAGE value="Updating the main site and additional changes" />
     <MESSAGE value="Photo review, Commenting, Reply/Delete" />
     <MESSAGE value="Description of the image fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Description of the image fixed" />
+    <MESSAGE value="Statistic, Fixing Footer, Edited Profile Menu, Admin Panel, Icon/Banner" />
+    <option name="LAST_COMMIT_MESSAGE" value="Statistic, Fixing Footer, Edited Profile Menu, Admin Panel, Icon/Banner" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

@@ -30,7 +30,7 @@ if (isset($_SESSION['hiba'])) {
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <link rel="stylesheet" href="../styles/css.css">
+    <link rel="stylesheet" href="../styles/style.css">
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>

@@ -91,7 +91,7 @@ while ($row = oci_fetch_array($stidKategoria, OCI_ASSOC)) {
 <head>
     <meta charset="UTF-8">
     <title>Főoldal - Képgaléria</title>
-    <link rel="stylesheet" href="styles/css.css">
+    <link rel="stylesheet" href="styles/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="<?php echo BASE_URL; ?>">
 </head>
@@ -153,7 +153,7 @@ while ($row = oci_fetch_array($stidKategoria, OCI_ASSOC)) {
                     <p><strong>Kategóriák:</strong> <?= htmlspecialchars($img['KATEGORIANK']) ?></p>
                     <p><strong>Leírás:</strong> <?= nl2br(htmlspecialchars($img['LEIRAS'])) ?></p>
                     <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
-                        <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törölni szeretnéd a képet?');">
+                        <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törölni szeretnéd a képet?');" class="location_torles">
                             <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">
                             <button type="submit" class="delete-button">Törlés</button>
                         </form>

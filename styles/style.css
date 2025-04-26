@@ -48,7 +48,7 @@ form {
 }
 
 /* Alap urlap stilus felulirasa, hogy ne torzuljon az oldal elrendezese */
-#location_torles {
+.location_torles {
     padding: 0px;
     border: 0px;
     margin-bottom: 0px;

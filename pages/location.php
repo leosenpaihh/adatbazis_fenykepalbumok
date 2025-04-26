@@ -31,7 +31,7 @@ while ($row = oci_fetch_assoc($stid)) {
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <link rel="stylesheet" href="../styles/css.css">
+    <link rel="stylesheet" href="../styles/style.css">
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -83,7 +83,7 @@ while ($row = oci_fetch_assoc($stid)) {
                     </button>
                 </td>
                 <td>
-                    <form action="<?= BASE_URL ?>controllers/location_handler.php" method="post" id="location_torles">
+                    <form action="<?= BASE_URL ?>controllers/location_handler.php" method="post" class="location_torles">
                         <input type="hidden" id="id" name="id" value='<?= $telepules["ID"] ?>'>
 
                         <input type="submit" name="torles" value="Törlés">

@@ -1,10 +1,11 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: pages/login.php");
+    header("Location: " . BASE_URL . "pages/login.php");
     exit;
 }
 
@@ -21,19 +22,25 @@ while ($row = oci_fetch_assoc($stid)) {
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+    <link rel="stylesheet" href="../styles/css.css">
+
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Profil</title>
+    <base href="<?php echo BASE_URL; ?>">
+
 </head>
 <body>
-<h1>Felhasználói adataid</h1>
 
-<p>Felhasználónév: <?= htmlspecialchars($felhasznalo['felhasznalonev']) ?></p>
-<p>Vezetéknév: <?= htmlspecialchars($felhasznalo['vezeteknev']) ?></p>
-<p>Keresztnév: <?= htmlspecialchars($felhasznalo['keresztnev']) ?></p>
-<p>Email: <?= htmlspecialchars($felhasznalo['email']) ?></p>
-<p>Település: <?= htmlspecialchars($felhasznalo['telepules_nev']) ?></p>
-<p>Admin státusz: <?= $felhasznalo['admin'] == 1 ? 'Admin' : 'Normál felhasználó' ?></p>
+<div class="profile-card">
+    <h1>Felhasználói adataid</h1>
+    <p><strong>Felhasználónév:</strong> <?= htmlspecialchars($felhasznalo['felhasznalonev']) ?></p>
+    <p><strong>Vezetéknév:</strong> <?= htmlspecialchars($felhasznalo['vezeteknev']) ?></p>
+    <p><strong>Keresztnév:</strong> <?= htmlspecialchars($felhasznalo['keresztnev']) ?></p>
+    <p><strong>Email:</strong> <?= htmlspecialchars($felhasznalo['email']) ?></p>
+    <p><strong>Település:</strong> <?= htmlspecialchars($felhasznalo['telepules_nev']) ?></p>
+    <p><strong>Admin státusz:</strong> <?= $felhasznalo['admin'] == 1 ? 'Admin' : 'Normál felhasználó' ?></p>
+</div>
 
 <h2>Profil módosítása</h2>
 
@@ -47,7 +54,7 @@ while ($row = oci_fetch_assoc($stid)) {
     <?php unset($_SESSION['message']); ?>
 <?php endif; ?>
 
-<form action="../controllers/profile_handler.php" method="post">
+<form action="<?php echo BASE_URL; ?>controllers/profile_handler.php" method="post">
     <label for="felhasznalonev">Felhasználónév:</label><br>
     <input type="text" id="felhasznalonev" name="felhasznalonev" value="<?= htmlspecialchars($felhasznalo['felhasznalonev']) ?>" required maxlength="50"><br>
 
@@ -72,5 +79,8 @@ while ($row = oci_fetch_assoc($stid)) {
 
     <input type="submit" value="Profil frissítése">
 </form>
+<footer>
+    <p>&copy; 2025 Fénykép Albumok. Minden jog fenntartva.</p>
+</footer>
 </body>
 </html>

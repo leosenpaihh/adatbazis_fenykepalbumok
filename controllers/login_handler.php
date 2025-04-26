@@ -1,6 +1,9 @@
 <?php
+global $conn;
 session_start();
 require_once '../includes/db.php';
+require_once '../includes/base.php';
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $felhasznalonev = $_POST['felhasznalonev'];

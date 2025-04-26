@@ -1,9 +1,11 @@
 <?php
+require_once '../includes/base.php';
+
 session_start();
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: pages/login.php");
+    header("Location: " . BASE_URL . "pages/photo.php");
     exit;
 }
 
@@ -19,7 +21,7 @@ if ($_FILES['foto']['error'] == UPLOAD_ERR_OK) {
     $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
     if (!in_array($foto_type, $allowed_types)) {
         $_SESSION['hiba'] = "Csak képfájlok (.jpg, .png, .gif) tölthetők fel!";
-        header("Location: ../pages/photo.php");
+        header("Location: " . BASE_URL . "pages/photo.php");
         exit;
     }
 
@@ -61,7 +63,7 @@ if ($_FILES['foto']['error'] == UPLOAD_ERR_OK) {
 
                 $lob->free();
                 $_SESSION['message'] = "A fénykép sikeresen feltöltve!";
-                header("Location: ../pages/photo.php");
+                header("Location: " . BASE_URL . "pages/photo.php");
                 exit;
             }
         }
@@ -78,5 +80,5 @@ if ($_FILES['foto']['error'] == UPLOAD_ERR_OK) {
     $_SESSION['hiba'] = "Hiba történt a fájl feltöltése közben!";
 }
 
-header("Location: ../pages/photo.php");
+header("Location: " . BASE_URL . "pages/photo.php");
 exit;

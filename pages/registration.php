@@ -1,4 +1,5 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
@@ -19,8 +20,11 @@ unset($_SESSION['urlap_adatok']);
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+    <link rel="stylesheet" href="../styles/css.css">
+
     <meta charset="UTF-8">
     <title>Regisztráció</title>
+    <base href="<?php echo BASE_URL; ?>">
 </head>
 <body>
 <h1>Regisztráció</h1>
@@ -29,7 +33,7 @@ unset($_SESSION['urlap_adatok']);
     <p><?= htmlspecialchars($hiba) ?></p>
 <?php endif; ?>
 
-<form action="../controllers/registration_handler.php" method="post">
+<form action="controllers/registration_handler.php" method="post">
     <label for="vezeteknev">Vezetéknév:</label><br>
     <input type="text" id="vezeteknev" name="vezeteknev" required minlength="2" maxlength="50"
            value="<?= htmlspecialchars($regi['vezeteknev'] ?? '') ?>"><br>

@@ -1,6 +1,8 @@
 <?php
+require_once '../includes/base.php';
 session_start();
-require_once '../includes/db.php';
+include('../includes/db.php');
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $vezeteknev = $_POST['vezeteknev'];
@@ -60,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'email' => $email,
             'telepules' => $telepules
         ];
-        header('Location: ../pages/registration.php');
+        header('Location: ' . BASE_URL . 'pages/registration.php');
         exit;
     }
 
@@ -81,12 +83,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (oci_execute($stid)) {
         $_SESSION['message'] = "Sikeres regisztráció! Lépj be.";
-        header('Location: ../pages/login.php');
+        header('Location: ' . BASE_URL . 'pages/login.php');
         exit;
     } else {
         $e = oci_error($stid);
         $_SESSION['message'] = "Sikertelen regisztráció: " . $e['message'];
-        header('Location: ../pages/registration.php');
+        header('Location: ' . BASE_URL . 'pages/registration.php');
         exit;
     }
 }

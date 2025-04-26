@@ -1,4 +1,5 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
@@ -30,15 +31,18 @@ while ($row = oci_fetch_assoc($stid)) {
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+    <link rel="stylesheet" href="../styles/css.css">
+
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script type="text/javascript" src="shared/modify.js"></script>
     <title>Település hozzáadása</title>
+    <base href="<?php echo BASE_URL; ?>">
 </head>
 <body>
 <h1>Település hozzáadása</h1>
 
-<form action="../controllers/location_handler.php" method="post">
+<form action="controllers/location_handler.php" method="post">
     <label for="orszag">Ország:</label><br>
     <input type="text" id="orszag" name="orszag" required maxlength="100"><br>
 

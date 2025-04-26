@@ -1,9 +1,10 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 require_once '../includes/db.php';
 
 if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: pages/login.php");
+    header("Location: " . BASE_URL . "pages/login.php");
     exit;
 }
 
@@ -89,13 +90,13 @@ if (empty($hibak)) {
 
 
         $_SESSION['message'] = "A profil sikeresen frissítve!";
-        header("Location: ../pages/profile.php");
+        header("Location: " . BASE_URL . "pages/profile.php");
         exit;
     } else {
         $_SESSION['hiba'] = "Hiba történt a frissítés során!";
     }
 } else {
     $_SESSION['hiba'] = implode("<br>", $hibak);
-    header("Location: ../pages/profile.php");
+    header("Location: " . BASE_URL . "pages/profile.php");
     exit;
 }

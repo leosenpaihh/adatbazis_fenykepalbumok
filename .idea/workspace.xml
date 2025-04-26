@@ -4,7 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="" />
+    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/album_edit_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/album_edit_handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/album_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/album_handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/album_list_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/album_list_handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/category_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/category_handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/location_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/location_handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/login_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/login_handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/logout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/photo_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/photo_handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/profile_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/profile_handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/registration_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/registration_handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/db.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/album.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/album_edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album_edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/album_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album_list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/location.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/location.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/photo.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/photo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/registration.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/registration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/menu.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +50,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP">
+    <include_path>
+      <path value="$PROJECT_DIR$/../../../../../instantclient_23_7" />
+    </include_path>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -31,45 +63,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/xampp/htdocs",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;PHP Script.db.php.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/instantclient_23_7/ojdbc11.jar&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.webide.settings.project.settings.php&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "oracle"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;oracle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\LEOWINDOWS\Desktop\fenykepalbumok_data\adatbazis_fenykepalbumok\includes" />
       <recent name="C:\xampp\htdocs\controllers" />
       <recent name="C:\xampp\htdocs" />
       <recent name="C:\xampp\htdocs\pages\shared" />
       <recent name="C:\xampp\htdocs\pages" />
-      <recent name="C:\xampp\htdocs\includes" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-PS-251.23774.436" />
-        <option value="bundled-php-predefined-a98d8de5180a-aaeaa8632555-com.jetbrains.php.sharedIndexes-PS-251.23774.436" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PS-241.14494.237" />
+        <option value="bundled-php-predefined-ba97393d7c68-8f0632a2a215-com.jetbrains.php.sharedIndexes-PS-241.14494.237" />
       </set>
     </attachedChunks>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="" />
@@ -81,10 +115,27 @@
       <workItem from="1745065946939" duration="5374000" />
       <workItem from="1745216491721" duration="15363000" />
       <workItem from="1745307097421" duration="8583000" />
+      <workItem from="1745445477748" duration="4573000" />
+      <workItem from="1745450492622" duration="3248000" />
+      <workItem from="1745454258112" duration="3709000" />
+      <workItem from="1745504556212" duration="7421000" />
+      <workItem from="1745570834253" duration="566000" />
+      <workItem from="1745571534170" duration="5396000" />
+      <workItem from="1745578715521" duration="145000" />
+      <workItem from="1745580263109" duration="19134000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand>
+      <path>
+        <item name="adatbazis_fenykepalbumok" type="b2602c69:ProjectViewProjectNode" />
+        <item name="dir{file://C:/Users/LEOWINDOWS/Desktop/fenykepalbumok_data/adatbazis_fenykepalbumok}" type="462c0819:PsiDirectoryNode" />
+      </path>
+    </expand>
+    <select />
   </component>
 </project>

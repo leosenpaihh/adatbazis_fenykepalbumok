@@ -1,9 +1,10 @@
 <?php
+require_once '../includes/base.php'; // BASE_URL definiálva van itt.
 session_start();
 require_once '../includes/db.php';
 
 if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: pages/login.php");
+    header("Location: " . BASE_URL . "pages/login.php");
     exit;
 }
 
@@ -21,7 +22,7 @@ if ($_POST['muv'] === 'letrehozas') {
 
     if ($row['CNT'] > 0) {
         $_SESSION['hiba'] = "Már van ilyen nevű albumod!";
-        header("Location: ../pages/album.php");
+        header("Location: " . BASE_URL . "pages/album.php");
         exit;
     }
 
@@ -52,6 +53,6 @@ if ($_POST['muv'] === 'letrehozas') {
         $_SESSION['hiba'] = "Hiba az album létrehozásakor!";
     }
 
-    header("Location: ../pages/album.php");
+    header("Location: " . BASE_URL . "pages/album.php");
     exit;
 }

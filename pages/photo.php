@@ -1,4 +1,5 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
@@ -22,14 +23,18 @@ if (isset($_SESSION['message'])) {
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+    <link rel="stylesheet" href="../styles/css.css">
+
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Fénykép Feltöltése</title>
+    <base href="<?php echo BASE_URL; ?>">
+
 </head>
 <body>
 <h1>Fénykép Feltöltése</h1>
 
-<form action="../controllers/photo_handler.php" method="post" enctype="multipart/form-data">
+<form action="controllers/photo_handler.php" method="post" enctype="multipart/form-data">
     <label for="cim">Cím:</label><br>
     <input type="text" id="cim" name="cim" required maxlength="255"><br>
 
@@ -62,10 +67,30 @@ if (isset($_SESSION['message'])) {
     }
     ?>
 
-    <label for="foto">Fénykép feltöltése:</label><br>
-    <input type="file" id="foto" name="foto" accept="image/*" required><br>
+    <input type="file" id="foto" name="foto" accept="image/*" required style="display: none;">
+    <button type="button" id="fileButton">Fájl kiválasztása</button>
+    <span id="file-name">Nincs fájl kiválasztva</span>
+    <script>
+        const fileInput = document.getElementById('foto');
+        const fileButton = document.getElementById('fileButton');
+        const fileNameSpan = document.getElementById('file-name');
 
-    <input type="submit" value="Feltöltés">
+        // Gomb kattintásra megnyitjuk a fájl kiválasztót
+        fileButton.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Ha kiválasztottak egy fájlt
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileNameSpan.textContent = fileInput.files[0].name;
+            } else {
+                fileNameSpan.textContent = 'Nincs fájl kiválasztva';
+            }
+        });
+    </script>
+
+    <br><br><input type="submit" value="Feltöltés">
 </form>
 </body>
 </html>

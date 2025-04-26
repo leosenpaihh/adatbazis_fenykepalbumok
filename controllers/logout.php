@@ -1,6 +1,7 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 session_unset();
 session_destroy();
-header("Location: /pages/login.php");
+header("Location: " . BASE_URL . "index.php");
 exit;

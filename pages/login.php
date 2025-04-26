@@ -1,4 +1,5 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 include __DIR__ . '/shared/menu.php';
 
@@ -9,8 +10,11 @@ unset($_SESSION['hiba']);
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+    <link rel="stylesheet" href="../styles/css.css">
+
     <meta charset="UTF-8">
     <title>Bejelentkezés</title>
+    <base href="<?php echo BASE_URL; ?>">
 </head>
 <body>
 <h1>Bejelentkezés</h1>
@@ -19,7 +23,7 @@ unset($_SESSION['hiba']);
     <p><?= htmlspecialchars($hiba) ?></p>
 <?php endif; ?>
 
-<form action="../controllers/login_handler.php" method="post">
+<form action="controllers/login_handler.php" method="post">
     <label for="username">Felhasználónév:</label><br>
     <input type="text" id="username" name="felhasznalonev" required minlength="2" maxlength="50"><br>
 

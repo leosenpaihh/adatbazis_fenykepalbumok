@@ -1,16 +1,17 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: ../pages/login.php");
+    header("Location: " . BASE_URL . "pages/login.php");
     exit;
 }
 
 $album_id = $_POST['album_id'] ?? null;
 if (!$album_id) {
     $_SESSION['hiba'] = "Érvénytelen album azonosító!";
-    header("Location: ../pages/album_list.php");
+    header("Location: " . BASE_URL . "pages/album_list.php");
     exit;
 }
 
@@ -24,7 +25,7 @@ $album = oci_fetch_assoc($stid_check);
 
 if (!$album) {
     $_SESSION['hiba'] = "Nincs jogosultságod ennek az albumnak a törléséhez!";
-    header("Location: ../pages/album_list.php");
+    header("Location: " . BASE_URL . "pages/album_list.php");
     exit;
 }
 
@@ -46,5 +47,5 @@ if ($result) {
     $_SESSION['hiba'] = "Hiba történt az album törlése során!";
 }
 
-header("Location: ../pages/album_list.php");
+header("Location: " . BASE_URL . "pages/album_list.php");
 exit;

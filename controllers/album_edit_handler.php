@@ -1,9 +1,10 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: login.php");
+    header("Location: " . BASE_URL . "pages/login.php");
     exit;
 }
 
@@ -14,7 +15,7 @@ $kepek = $_POST['kepek'] ?? [];
 
 if (!$album_id || !$album_nev) {
     $_SESSION['hiba'] = "Minden mezőt ki kell tölteni!";
-    header("Location: ../pages/album_edit.php?album_id=" . $album_id);
+    header("Location: " . BASE_URL . "pages/album_edit.php?album_id=" . $album_id);
     exit;
 }
 
@@ -27,7 +28,7 @@ $album = oci_fetch_assoc($stid_check);
 
 if (!$album) {
     $_SESSION['hiba'] = "Nincs jogosultságod ennek az albumnak a módosítására!";
-    header("Location: ../pages/album_list.php");
+    header("Location: " . BASE_URL . "pages/album_list.php");
     exit;
 }
 
@@ -84,10 +85,10 @@ if (oci_execute($stid_update)) {
     }
 
     $_SESSION['message'] = "Album sikeresen módosítva!";
-    header("Location: ../pages/album_list.php");
+    header("Location: " . BASE_URL . "pages/album_list.php");
     exit;
 } else {
     $_SESSION['hiba'] = "Hiba történt az album módosítása során!";
-    header("Location: ../pages/album_edit.php?album_id=" . $album_id);
+    header("Location: " . BASE_URL . "pages/album_edit.php?album_id=" . $album_id);
     exit;
 }

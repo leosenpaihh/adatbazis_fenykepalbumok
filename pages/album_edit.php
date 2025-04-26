@@ -1,16 +1,17 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: login.php");
+    header("Location: " . BASE_URL . "pages/login.php");
     exit;
 }
 
 $album_id = $_GET['album_id'] ?? null;
 if (!$album_id) {
-    header("Location: album_list.php");
+    header("Location: " . BASE_URL . "pages/album_list.php");
     exit;
 }
 
@@ -23,7 +24,7 @@ $album = oci_fetch_assoc($stid);
 
 if (!$album) {
     $_SESSION['hiba'] = "Nem található ilyen album, vagy nem jogosult a módosításra.";
-    header("Location: album_list.php");
+    header("Location: " . BASE_URL . "pages/album_list.php");
     exit;
 }
 
@@ -41,14 +42,18 @@ oci_execute($stid_images);
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+    <link rel="stylesheet" href="../styles/css.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Album módosítása</title>
+    <base href="<?php echo BASE_URL; ?>">
+
 </head>
 <body>
 <h1>Album módosítása</h1>
 
-<form action="../controllers/album_edit_handler.php" method="post">
+<form action="<?php echo BASE_URL; ?>controllers/album_edit_handler.php" method="post">
     <input type="hidden" name="album_id" value="<?= htmlspecialchars($album['ID']) ?>">
 
     <label for="album_nev">Album Címe:</label><br>

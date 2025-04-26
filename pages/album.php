@@ -1,10 +1,11 @@
 <?php
+require_once '../includes/base.php';
 session_start();
 include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: pages/login.php");
+    header("Location: " . BASE_URL . "pages/login.php");
     exit;
 }
 
@@ -22,8 +23,11 @@ if (isset($_SESSION['message'])) {
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+    <link rel="stylesheet" href="../styles/css.css">
     <meta charset="UTF-8">
     <title>Album létrehozása</title>
+    <base href="http://localhost/adatbazis_fenykepalbumok/">
+
 </head>
 <body>
 <?php
@@ -40,7 +44,7 @@ oci_execute($kep_lekerdezes);
 ?>
 <h1>Album létrehozása</h1>
 
-<form action="../controllers/album_handler.php" method="post">
+<form action="controllers/album_handler.php" method="post">
     <input type="text" name="nev" placeholder="Album neve" required maxlength="255"><br>
     <textarea name="leiras" placeholder="Album leírása"></textarea><br>
 

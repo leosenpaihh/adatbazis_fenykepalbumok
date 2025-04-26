@@ -139,7 +139,8 @@ while ($row = oci_fetch_array($stidKategoria, OCI_ASSOC)) {
                 $kepData = $img['KEP_BINARIS'] ?? '';
                 if (!empty($kepData)) {
                     $base64 = base64_encode($kepData);
-                    echo "<img src='data:image/jpeg;base64,{$base64}' alt='" . htmlspecialchars($img['CIM']) . "'>";
+                    // Link hozzáadása a képre kattintás esetén
+                    echo "<a href='pages/photo_review.php?kep_id=" . urlencode($img['ID']) . "'><img src='data:image/jpeg;base64,{$base64}' alt='" . htmlspecialchars($img['CIM']) . "'></a>";
                 } else {
                     echo "Nincs kép";
                 }

@@ -47,6 +47,13 @@ form {
     margin-bottom: 20px;
 }
 
+/* Alap urlap stilus felulirasa, hogy ne torzuljon az oldal elrendezese */
+#location_torles {
+    padding: 0px;
+    border: 0px;
+    margin-bottom: 0px;
+}
+
 /* Űrlapelemek stílusai */
 input[type="text"],
 input[type="password"],

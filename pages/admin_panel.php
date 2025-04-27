@@ -26,28 +26,11 @@ if (empty($_SESSION['felhasznalo']) || $_SESSION['felhasznalo']['admin'] != 1) {
     <div class="wrapper">
         <h1>Admin Panel</h1>
 
-        <?php if (!empty($_SESSION['felhasznalo']['admin'])): ?>
-            <?php
-            if (isset($_SESSION['hiba'])) {
-                echo "<p>" . $_SESSION['hiba'] . "</p>";
-                unset($_SESSION['hiba']);
-            }
-
-            if (isset($_SESSION['message'])) {
-                echo "<p>" . $_SESSION['message'] . "</p>";
-                unset($_SESSION['message']);
-            }
-            ?>
-
-            <h2>Kategória létrehozása</h2>
-            <form action="controllers/category_handler.php" method="post">
-                <label for="nev">Kategória neve:</label><br>
-                <input type="text" id="nev" name="nev" required maxlength="100"><br><br>
-                <input type="submit" value="Kategória létrehozása">
+        <?php if (!empty($_SESSION['felhasznalo']['admin']) && $_SESSION['felhasznalo']['admin'] == 1): ?>
+            <h2>Kategóriák kezelése</h2>
+            <form action="<?php echo BASE_URL; ?>/pages/category.php" method="get">
+                <button type="submit">Menj a Kategóriákhoz</button>
             </form>
-
-        <?php else: ?>
-            <p>Nincs jogosultságod az admin funkciók eléréséhez.</p>
         <?php endif; ?>
 
     </div>

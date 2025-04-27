@@ -7,6 +7,10 @@ if (empty($_SESSION['felhasznalo']) || $_SESSION['felhasznalo']['admin'] != 1) {
     header("Location: " . BASE_URL . "pages/login.php");
     exit;
 }
+if ($_SESSION['felhasznalo']['admin'] != 1) {
+    header("Location: " . BASE_URL . "index.php");
+    exit;
+}
 
 $new_nev = $_POST['nev'];
 

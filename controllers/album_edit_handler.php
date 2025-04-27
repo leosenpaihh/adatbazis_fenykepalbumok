@@ -14,7 +14,7 @@ $album_nev = $_POST['album_nev'] ?? null;
 $album_leiras = $_POST['album_leiras'] ?? null;
 $kepek = $_POST['kepek'] ?? [];
 
-if (!$album_id || !$album_nev) {
+if (!$album_id || !$album_nev || !$album_owner) {
     $_SESSION['hiba'] = "Minden mezőt ki kell tölteni!";
     header("Location: " . BASE_URL . "pages/album_edit.php?album_id=" . $album_id);
     exit;

@@ -60,6 +60,7 @@ oci_execute($stid_images);
 
 <form action="<?php echo BASE_URL; ?>controllers/album_edit_handler.php" method="post">
     <input type="hidden" name="album_id" value="<?= htmlspecialchars($album['ID']) ?>">
+    <input type="hidden" name="album_owner" value="<?= htmlspecialchars($album_owner) ?>">
 
     <label for="album_nev">Album Címe:</label><br>
     <input type="text" id="album_nev" name="album_nev" value="<?= htmlspecialchars($album['NEV']) ?>" required><br><br>

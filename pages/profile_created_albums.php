@@ -160,11 +160,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['album_id'])) {
                     </div>
                     <div class="album-footer">
                         <p>Készítette: <?= htmlspecialchars($row['FELHASZNALO_FELHASZNALONEV']) ?></p>
-                        <form action="<?= BASE_URL; ?>controllers/album_list_handler.php" method="post" style="display:inline-block;">
+                        <form action="<?= BASE_URL; ?>controllers/album_list_handler.php" method="post" style="display:inline-block;" class="location_torles">
                             <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
                             <input type="submit" name="edit" value="Módosítás">
                         </form>
-                        <form action="<?= BASE_URL; ?>controllers/album_list_handler.php" method="post" style="display:inline-block;"
+                        <form action="<?= BASE_URL; ?>controllers/album_list_handler.php" method="post" style="display:inline-block;" class="location_torles"
                               onsubmit="return confirm('Biztosan törölni szeretnéd ezt az albumot? Ez a művelet nem visszavonható!');">
                             <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
                             <input type="submit" name="delete" value="Törlés">

@@ -427,15 +427,21 @@ select:focus {
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+.album-title-preview {
+    font-size: 2em;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+}
 /* Leírás: maximum három sor, hogy ne lógjon ki a dobozból */
-.album-description {
-    font-size: 14px;
-    color: #555;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+.description {
+    font-size: 1.1em;
+    text-align: center;
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .album-footer {
     font-size: 12px;
@@ -465,3 +471,4 @@ select:focus {
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+

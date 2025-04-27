@@ -74,21 +74,29 @@ if (isset($_SESSION['hiba'])) {
                         if (isset($row['LEIRAS']) && !is_null($row['LEIRAS'])) {
                             $leiras = oci_lob_read($row['LEIRAS'], $row['LEIRAS']->size());
                         }
-                        echo htmlspecialchars($leiras) ?: 'Nincs leírás';
+                        if (strlen($leiras) > 100) {
+                            $leiras_rovid = htmlspecialchars(mb_substr($leiras, 0, 100)) . "...";
+                            echo $leiras_rovid;
+                            ?>
+                            <a href="pages/album_preview.php?album_id=<?= htmlspecialchars($album_id) ?>">Tovább</a>
+                            <?php
+                        } else {
+                            echo htmlspecialchars($leiras) ?: 'Nincs leírás';
+                        }
                         ?>
                     </div>
-
                     <p><strong>Fényképek száma:</strong> <?= $fenykepek_szama ?></p>
 
                     <div class="album-images">
                         <?php
-                        // Számláló a képekhez
                         $count = 0;
                         while (($img = oci_fetch_assoc($stid_images)) && ($count < 4)) :
                             $count++;
                             ?>
-                            <img src="controllers/show_image.php?image_id=<?= htmlspecialchars($img['ID']) ?>"
-                                 alt="<?= htmlspecialchars($img['CIM']) ?>" class="album-image">
+                            <a href="pages/album_preview.php?album_id=<?= htmlspecialchars($album_id) ?>">
+                                <img src="controllers/show_image.php?image_id=<?= htmlspecialchars($img['ID']) ?>"
+                                     alt="<?= htmlspecialchars($img['CIM']) ?>" class="album-image">
+                            </a>
                         <?php endwhile; ?>
                     </div>
 

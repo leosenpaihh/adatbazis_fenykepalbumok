@@ -4,17 +4,14 @@ session_start();
 include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
-// Ha nincs bejelentkezve, irányítsuk át a login oldalra
 if (!isset($_SESSION['felhasznalo'])) {
     header("Location: " . BASE_URL . "pages/login.php");
     exit;
 }
 
-// POST feldolgozás: Ha a felhasználó szerkesztené vagy törölni szeretné valamelyik albumát
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['album_id'])) {
     $album_id = $_POST['album_id'];
 
-    // Módosítás esetén
     if (isset($_POST['edit'])) {
         $sql_check = "SELECT ID FROM FENYKEPALBUM 
                       WHERE ID = :album_id AND FELHASZNALO_FELHASZNALONEV = :username";
@@ -32,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['album_id'])) {
         exit;
     }
 
-    // Törlés esetén
     if (isset($_POST['delete'])) {
         $sql_check = "SELECT ID FROM FENYKEPALBUM 
                       WHERE ID = :album_id AND FELHASZNALO_FELHASZNALONEV = :username";
@@ -75,20 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['album_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../styles/favicon.ico" type="image/ico">
     <base href="<?= BASE_URL ?>">
-    <style>
-        .page-container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .wrapper {
-            flex: 1;
-            padding: 20px;
-        }
-        footer {
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
 <div class="page-container">
@@ -140,11 +122,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['album_id'])) {
                     <div class="album-title"><?= htmlspecialchars($row['NEV']) ?: 'Nincs cím' ?></div>
                     <div class="album-description">
                         <?php
-                        $leiras = "";
+                        $leiras = '';
                         if (isset($row['LEIRAS']) && !is_null($row['LEIRAS'])) {
                             $leiras = oci_lob_read($row['LEIRAS'], $row['LEIRAS']->size());
                         }
-                        echo htmlspecialchars($leiras) ?: "Nincs leírás";
+                        if (strlen($leiras) > 100) {
+                            $leiras_rovid = htmlspecialchars(mb_substr($leiras, 0, 100)) . "...";
+                            echo $leiras_rovid;
+                            ?>
+                            <a href="pages/album_preview.php?album_id=<?= htmlspecialchars($album_id) ?>">Tovább</a>
+                            <?php
+                        } else {
+                            echo htmlspecialchars($leiras) ?: 'Nincs leírás';
+                        }
                         ?>
                     </div>
                     <p><strong>Fényképek száma:</strong> <?= $fenykepek_szama ?></p>
@@ -154,26 +144,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['album_id'])) {
                         while (($img = oci_fetch_assoc($stid_images)) && ($count < 4)) :
                             $count++;
                             ?>
-                            <img src="controllers/show_image.php?image_id=<?= htmlspecialchars($img['ID']) ?>"
-                                 alt="<?= htmlspecialchars($img['CIM']) ?>" class="album-image">
+                            <a href="pages/album_preview.php?album_id=<?= htmlspecialchars($album_id) ?>">
+                                <img src="controllers/show_image.php?image_id=<?= htmlspecialchars($img['ID']) ?>"
+                                     alt="<?= htmlspecialchars($img['CIM']) ?>" class="album-image">
+                            </a>
                         <?php endwhile; ?>
                     </div>
                     <div class="album-footer">
                         <p>Készítette: <?= htmlspecialchars($row['FELHASZNALO_FELHASZNALONEV']) ?></p>
-                        <form action="<?= BASE_URL; ?>controllers/album_list_handler.php" method="post" style="display:inline-block;" class="location_torles">
-                            <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
-                            <input type="submit" name="edit" value="Módosítás">
-                        </form>
-                        <form action="<?= BASE_URL; ?>controllers/album_list_handler.php" method="post" style="display:inline-block;" class="location_torles"
-                              onsubmit="return confirm('Biztosan törölni szeretnéd ezt az albumot? Ez a művelet nem visszavonható!');">
-                            <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
-                            <input type="submit" name="delete" value="Törlés">
-                        </form>
+                        <?php
+                        if (strtolower($row['FELHASZNALO_FELHASZNALONEV']) === strtolower($_SESSION['felhasznalo']['felhasznalonev']) || $_SESSION['felhasznalo']['admin'] == 1):
+                            ?>
+                            <form action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post"
+                                  style="display:inline-block;" class="location_torles">
+                                <input type="hidden" name="album_owner" value="<?= htmlspecialchars($row['FELHASZNALO_FELHASZNALONEV']) ?>">
+                                <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
+                                <input type="submit" name="edit" value="Módosítás">
+                            </form>
+                            <form action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post"
+                                  style="display:inline-block;"
+                                  onsubmit="return confirm('Biztosan törölni szeretnéd ezt az albumot? Ez a művelet nem visszavonható!');"
+                                  class="location_torles">
+                                <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
+                                <input type="submit" name="delete" value="Törlés">
+                            </form>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endwhile; ?>
+
             <?php if (!$album_found): ?>
-                <p>Nincs létrehozva album.</p>
+                <p>Nem találtunk albumot.</p>
             <?php endif; ?>
         </div>
     </div>

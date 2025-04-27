@@ -38,6 +38,7 @@ while ($row = oci_fetch_assoc($stid)) {
 <head>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="icon" href="../styles/favicon.ico" type="image/ico">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script type="text/javascript" src="shared/modify.js"></script>
@@ -62,49 +63,49 @@ while ($row = oci_fetch_assoc($stid)) {
             <input type="submit" name="letrehozas" value="Helyszín hozzáadása">
         </form>
         <h2>Helyszínek</h2>
-        <table>
+        <table class="location-table">
             <thead>
             <tr>
-                <!--        <th>ID</th>-->
                 <th>Ország</th>
                 <th>Megye</th>
                 <th>Település</th>
-                <th></th>
-                <th></th>
+                <th>Módosítás</th>
+                <th>Törlés</th>
             </tr>
             </thead>
             <tbody>
             <?php if (count($telepulesek) > 0): ?>
                 <?php foreach ($telepulesek as $telepules): ?>
                     <tr>
-                        <!--                <td>--><?php //= htmlspecialchars($telepules['ID']) ?><!--</td>-->
                         <td><?= htmlspecialchars($telepules['ORSZAG']) ?></td>
                         <td><?= htmlspecialchars($telepules['MEGYE']) ?></td>
                         <td><?= htmlspecialchars($telepules['TELEPULES']) ?></td>
                         <td>
-                            <button onclick='modify(
+                            <button type="button" onclick='modify(
                             <?= json_encode($telepules) ?>,
                                     "modositas_id", "eredeti_id", "modositas_orszag", "eredeti_orszag", "modositas_megye", "eredeti_megye", "modositas_telepules", "eredeti_telepules"
                                     )'>
-                                Módosítás
+                                <span class="material-symbols-outlined">edit</span>
                             </button>
                         </td>
                         <td>
                             <form action="<?= BASE_URL ?>controllers/location_handler.php" method="post" class="location_torles">
-                                <input type="hidden" id="id" name="id" value='<?= $telepules["ID"] ?>'>
-
-                                <input type="submit" name="torles" value="Törlés">
+                                <input type="hidden" name="id" value='<?= $telepules["ID"] ?>'>
+                                <button type="submit" name="torles">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
                             </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="3">Nincsenek helyszínek.</td>
+                    <td colspan="5">Nincsenek helyszínek.</td>
                 </tr>
             <?php endif; ?>
             </tbody>
         </table>
+
         <hr />
         <div id="modositas_form" style="display: none">
             <form action="<?= BASE_URL ?>controllers/location_handler.php" method="post">
@@ -119,11 +120,12 @@ while ($row = oci_fetch_assoc($stid)) {
                 <input type="hidden" id="eredeti_telepules" name="eredeti_telepules" value="">
 
                 <input type="submit" name="modositas" value="Módosítás mentése">
+                <!-- A Mégse gomb: A type="button" meggátolja a  eseményt -->
+                <button type="button" name="megse" onclick="closeModificationForm()">Mégse</button>
             </form>
-            <button name="megse" onclick="closeModificationForm()">Mégse</button>
         </div>
-    </div>
-    <footer>
+
+        <footer>
         <p>&copy; 2025 Fénykép Albumok. Minden jog fenntartva.</p>
     </footer>
 </div>

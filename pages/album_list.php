@@ -37,6 +37,7 @@ if (isset($_SESSION['hiba'])) {
     <title>Albumok</title>
     <base href="<?php echo BASE_URL; ?>">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="icon" href="<?php echo BASE_URL; ?>styles/favicon.ico" type="image/ico">
 </head>
 <body>

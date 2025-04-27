@@ -72,6 +72,7 @@ oci_execute($stid_images);
     <title><?= htmlspecialchars($album['NEV'], ENT_QUOTES) ?> – Album</title>
     <base href="<?= BASE_URL ?>">
     <link rel="stylesheet" href="<?= BASE_URL ?>styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="icon" href="<?= BASE_URL ?>styles/favicon.ico" type="image/ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>

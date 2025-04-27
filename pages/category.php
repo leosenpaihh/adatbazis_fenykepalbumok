@@ -36,6 +36,7 @@ while ($row = oci_fetch_assoc($stid)) {
 <head>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="icon" href="../styles/favicon.ico" type="image/ico">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script type="text/javascript" src="category.js"></script>
@@ -48,54 +49,66 @@ while ($row = oci_fetch_assoc($stid)) {
 <form action="<?php echo BASE_URL; ?>controllers/category_handler.php" method="post">
     <label for="nev">Kategória neve:</label><br>
     <input type="text" id="nev" name="nev" required maxlength="100"><br>
-
     <input type="submit" name="letrehozas" value="Kategória létrehozása">
 </form>
-<h2>Létrehozott kategóriák</h2>
-<table>
-    <thead>
-    <tr>
-        <th>Név</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php if (count($kategoriak) > 0): ?>
-        <?php foreach ($kategoriak as $kategoria): ?>
+
+
+
+
+
+<div class="page-container">
+    <div class="wrapper">
+        <h2>Létrehozott kategóriák</h2>
+        <table class="location-table">
+            <thead>
             <tr>
-                <td><?= htmlspecialchars($kategoria['NEV']) ?></td>
-                <td>
-                    <button onclick='modifyCategory(<?= json_encode($kategoria["NEV"]) ?>)'>
-                        Módosítás
-                    </button>
-                </td>
-                <td>
-                    <form action="<?php echo BASE_URL; ?>controllers/category_handler.php" method="post" class="location_torles">
-                        <input type="hidden" id="nev" name="nev" value='<?= $kategoria["NEV"] ?>'>
-
-                        <input type="submit" name="torles" value="Törlés">
-                    </form>
-                </td>
+                <th>Név</th>
+                <th>Módosítás</th>
+                <th>Törlés</th>
             </tr>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <tr>
-            <td colspan="3">Nincsenek kategóriák.</td>
-        </tr>
-    <?php endif; ?>
-    </tbody>
-</table>
-<hr />
-<div id="modositas_form" style="display: none">
-    <form action="<?php echo BASE_URL; ?>controllers/category_handler.php" method="post">
-        <label for="nev">Módosítsd a kategória nevét:</label><br>
-        <input type="text" id="modositas_nev" name="nev" required maxlength="100"><br>
-        <input type="hidden" id="eredeti_nev" name="eredeti_nev" value="">
+            </thead>
+            <tbody>
+            <?php if (count($kategoriak) > 0): ?>
+                <?php foreach ($kategoriak as $kategoria): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($kategoria['NEV']) ?></td>
+                        <td>
+                            <button type="button" onclick='modifyCategory(<?= json_encode($kategoria["NEV"]) ?>)'>
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </td>
+                        <td>
+                            <form action="<?php echo BASE_URL; ?>controllers/category_handler.php" method="post" class="location_torles">
+                                <input type="hidden" name="nev" value='<?= $kategoria["NEV"] ?>'>
+                                <button type="submit" name="torles">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="3">Nincsenek kategóriák.</td>
+                </tr>
+            <?php endif; ?>
+            </tbody>
+        </table>
 
-        <input type="submit" name="modositas" value="Módosítás mentése">
-    </form>
-    <button name="megse" onclick="closeModificationForm()">Mégse</button>
+        <hr />
+        <div id="modositas_form" style="display: none">
+            <form action="<?php echo BASE_URL; ?>controllers/category_handler.php" method="post">
+                <label for="nev">Módosítsd a kategória nevét:</label><br>
+                <input type="text" id="modositas_nev" name="nev" required maxlength="100"><br>
+                <input type="hidden" id="eredeti_nev" name="eredeti_nev" value="">
+                <input type="submit" name="modositas" value="Módosítás mentése">
+                <button type="button" name="megse" onclick="closeModificationForm()">Mégse</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Fénykép Albumok. Minden jog fenntartva.</p>
+    </footer>
 </div>
 </body>
 </html>

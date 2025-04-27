@@ -114,7 +114,7 @@ if (isset($_SESSION['felhasznalo'])) {
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($img['CIM']) ?> - Kép megtekintése</title>
     <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete,reply" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/styles/favicon.ico" type="image/ico">

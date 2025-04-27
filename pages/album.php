@@ -24,6 +24,7 @@ if (isset($_SESSION['message'])) {
 <html lang="hu">
 <head>
     <link rel="stylesheet" href="../styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <meta charset="UTF-8">
     <title>Album létrehozása</title>
     <base href="http://localhost/adatbazis_fenykepalbumok/">

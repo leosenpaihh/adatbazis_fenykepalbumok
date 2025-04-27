@@ -43,7 +43,6 @@ $query = "SELECT
 
 $stid = oci_parse($conn, $query);
 
-// Paraméterek bindolása
 foreach ($params as $key => $value) {
     oci_bind_by_name($stid, $key, $params[$key]);
 }
@@ -118,6 +117,7 @@ if (isset($_SESSION['felhasznalo'])) {
     <link rel="icon" href="styles/favicon.ico" type="image/ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <base href="<?php echo BASE_URL; ?>">
 </head>
 <body>

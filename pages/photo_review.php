@@ -85,6 +85,28 @@ foreach ($comments as $id => &$comment) {
     }
 }
 unset($comment);
+
+$prErtekelesek = null;
+if (isset($_SESSION['felhasznalo'])) {
+    $ertekelesek = [];
+    $queryErtekeles = "SELECT * FROM ERTEKELES WHERE FELHASZNALO_FELHASZNALONEV = :felhasznalonev AND KEP_ID = :kep";
+
+    $stidErtekeles = oci_parse($conn, $queryErtekeles);
+    oci_bind_by_name($stidErtekeles, ':felhasznalonev', $_SESSION['felhasznalo']['felhasznalonev']);
+    oci_bind_by_name($stidErtekeles, ':kep', $_GET['kep_id']);
+    oci_execute($stidErtekeles);
+
+    $ertekelesek = oci_fetch_assoc($stidErtekeles);
+
+    if ($ertekelesek) {
+        $prErtekelesek = array(
+            $ertekelesek["KEP_ID"] => $ertekelesek["PONTSZAM"]
+        );
+    } else {
+        $prErtekelesek = null;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -93,6 +115,7 @@ unset($comment);
     <title><?= htmlspecialchars($img['CIM']) ?> - Kép megtekintése</title>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete,reply" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/styles/favicon.ico" type="image/ico">
     <base href="<?= BASE_URL ?>">
@@ -125,7 +148,31 @@ unset($comment);
                 <p><strong>Kategóriák:</strong> <?= htmlspecialchars($img['KATEGORIANK']) ?></p>
                 <p><strong>Leírás:</strong> <?= nl2br(htmlspecialchars($img['LEIRAS'])) ?></p>
 
-                <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
+        <?php if (isset($_SESSION['felhasznalo'])): ?>
+        <form method="POST" action="controllers/rating_handler.php?kep_id=<?php echo $img['ID']; ?>">
+            <div class="rating">
+                <?php if (!isset($prErtekelesek[$img['ID']])): ?>
+                <button name="letrehozas" type="submit" class="rating-button" title="Értékelés hozzáadása">
+                    <i class="fa fa-check"></i>
+                </button>
+                <?php else: ?>
+                <button name="modositas" type="submit" class="rating-button" title="Értékelés módosítása">
+                    <i class="fa fa-pencil"></i>
+                </button>
+                <button name="torles" type="submit" class="rating-button" title="Értékelés törlése">
+                    <i class="fa fa-x"></i>
+                </button>
+                <?php endif; ?>
+                <input type="radio" id="star5" name="rating" value="5" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 5) ? 'checked' : ''; ?> /><label for="star5" title="5"><i class="fa-solid fa-star"></i></label>
+                <input type="radio" id="star4" name="rating" value="4" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 4) ? 'checked' : ''; ?> /><label for="star4" title="4"><i class="fa-solid fa-star"></i></label>
+                <input type="radio" id="star3" name="rating" value="3" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 3) ? 'checked' : ''; ?> /><label for="star3" title="3"><i class="fa-solid fa-star"></i></label>
+                <input type="radio" id="star2" name="rating" value="2" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 2) ? 'checked' : ''; ?> /><label for="star2" title="2"><i class="fa-solid fa-star"></i></label>
+                <input type="radio" id="star1" name="rating" value="1" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 1) ? 'checked' : ''; ?> /><label for="star1" title="1"><i class="fa-solid fa-star"></i></label>
+            </div>
+        </form>
+        <?php endif ; ?>
+
+        <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
                     <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törlöd a képet?');">
                         <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">
                         <button type="submit" class="delete-button">Törlés</button>

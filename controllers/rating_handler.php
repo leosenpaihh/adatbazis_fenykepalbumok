@@ -16,11 +16,11 @@ if(isset($_POST['letrehozas'])) {
     oci_bind_by_name($stid, ':pontszam', $_POST['rating']);
 
     if (oci_execute($stid)) {
-        header("Location: " . BASE_URL . "index.php");
+        header("Location: " . BASE_URL . "pages/photo_review.php?kep_id=" . $_GET['kep_id']);
         exit;
     } else {
         $_SESSION['hiba'] = "Hiba történt az értékelés hozzáadása közben!";
-        header("Location: " . BASE_URL . "index.php");
+        header("Location: " . BASE_URL . "pages/photo_review.php?kep_id=" . $_GET['kep_id']);
         exit;
     }
 } elseif (isset($_POST['modositas'])) {
@@ -31,11 +31,11 @@ if(isset($_POST['letrehozas'])) {
     oci_bind_by_name($stid, ':kep', $_GET['kep_id']);
 
     if (oci_execute($stid)) {
-        header("Location: " . BASE_URL . "index.php");
+        header("Location: " . BASE_URL . "pages/photo_review.php?kep_id=" . $_GET['kep_id']);
         exit;
     } else {
         $_SESSION['hiba'] = "Hiba történt az értékelés módosítása közben!";
-        header("Location: " . BASE_URL . "index.php");
+        header("Location: " . BASE_URL . "pages/photo_review.php?kep_id=" . $_GET['kep_id']);
         exit;
     }
 } elseif (isset($_POST['torles'])) {
@@ -45,11 +45,11 @@ if(isset($_POST['letrehozas'])) {
     oci_bind_by_name($stid, ':kep', $_GET['kep_id']);
 
     if (oci_execute($stid)) {
-        header("Location: " . BASE_URL . "index.php");
+        header("Location: " . BASE_URL . "pages/photo_review.php?kep_id=" . $_GET['kep_id']);
         exit;
     } else {
         $_SESSION['hiba'] = "Hiba történt az értékelés törlése közben!";
-        header("Location: " . BASE_URL . "index.php");
+        header("Location: " . BASE_URL . "pages/photo_review.php?kep_id=" . $_GET['kep_id']);
         exit;
     }
 }

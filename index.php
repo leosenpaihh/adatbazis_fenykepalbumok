@@ -86,7 +86,7 @@ while ($row = oci_fetch_array($stidKategoria, OCI_ASSOC)) {
     $kategoriak[] = $row;
 }
 
-$prErtekelesek = null;
+$prErtekelesek = [];
 if (isset($_SESSION['felhasznalo'])) {
     $ertekelesek = [];
     $queryErtekeles = "SELECT * FROM ERTEKELES WHERE FELHASZNALO_FELHASZNALONEV = :felhasznalonev";
@@ -201,28 +201,15 @@ include __DIR__ . '/pages/shared/menu.php';
                         }
                         ?>
                     </p>
-                    <?php if (isset($_SESSION['felhasznalo'])): ?>
-                    <form method="POST" action="controllers/rating_handler.php?kep_id=<?php echo $img['ID']; ?>">
-                        <div class="rating">
-                            <?php if (!isset($prErtekelesek[$img['ID']])): ?>
-                            <button name="letrehozas" type="submit" class="rating-button" title="Értékelés hozzáadása">
-                                <i class="fa fa-check"></i>
-                            </button>
+                    <?php if (isset($_SESSION['felhasznalo']) && isset($prErtekelesek[$img['ID']])): ?>
+                    <p><strong>Értékelésed:</strong>
+                        <?php for ($i = 0; $i < 5; $i++) { ?>
+                            <?php if ($i < $prErtekelesek[$img['ID']]): ?>
+                                <i class="fa-solid fa-star rating-preview"></i>
                             <?php else: ?>
-                            <button name="modositas" type="submit" class="rating-button" title="Értékelés módosítása">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                            <button name="torles" type="submit" class="rating-button" title="Értékelés törlése">
-                                <i class="fa fa-x"></i>
-                            </button>
+                                <i class="fa-solid fa-star rating-preview rating-preview-gray"></i>
                             <?php endif; ?>
-                            <input type="radio" id="star5" name="rating" value="5" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 5) ? 'checked' : ''; ?> /><label for="star5" title="5"><i class="fa-solid fa-star"></i></label>
-                            <input type="radio" id="star4" name="rating" value="4" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 4) ? 'checked' : ''; ?> /><label for="star4" title="4"><i class="fa-solid fa-star"></i></label>
-                            <input type="radio" id="star3" name="rating" value="3" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 3) ? 'checked' : ''; ?> /><label for="star3" title="3"><i class="fa-solid fa-star"></i></label>
-                            <input type="radio" id="star2" name="rating" value="2" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 2) ? 'checked' : ''; ?> /><label for="star2" title="2"><i class="fa-solid fa-star"></i></label>
-                            <input type="radio" id="star1" name="rating" value="1" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 1) ? 'checked' : ''; ?> /><label for="star1" title="1"><i class="fa-solid fa-star"></i></label>
-                        </div>
-                    </form>
+                        <?php } ?>
                     <?php endif ; ?>
                     <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
                         <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törölni szeretnéd a képet?');" class="location_torles">

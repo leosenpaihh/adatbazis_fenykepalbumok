@@ -104,120 +104,143 @@ unset($comment);
     </script>
 </head>
 <body>
+<div class="page-container">
+    <div class="wrapper">
+        <div class="photo-review-container">
+            <!-- Kép -->
+            <div class="image-container">
+                <?php if (!empty($img['KEP_BINARIS'])): ?>
+                    <img src="data:image/jpeg;base64,<?= base64_encode($img['KEP_BINARIS']) ?>" alt="<?= htmlspecialchars($img['CIM']) ?>" class="photo-image">
+                <?php else: ?>
+                    <p>Nincs kép elérhető.</p>
+                <?php endif; ?>
+            </div>
 
-<div class="photo-review-container">
-    <!-- Kép -->
-    <div class="image-container">
-        <?php if (!empty($img['KEP_BINARIS'])): ?>
-            <img src="data:image/jpeg;base64,<?= base64_encode($img['KEP_BINARIS']) ?>" alt="<?= htmlspecialchars($img['CIM']) ?>" class="photo-image">
-        <?php else: ?>
-            <p>Nincs kép elérhető.</p>
-        <?php endif; ?>
-    </div>
+            <!-- Kép adatok -->
+            <div class="image-info">
+                <h2><?= htmlspecialchars($img['CIM']) ?></h2>
+                <p><strong>Feltöltötte:</strong> <?= htmlspecialchars($img['FELHASZNALO_FELHASZNALONEV']) ?></p>
+                <p><strong>Feltöltési dátum:</strong> <?= htmlspecialchars($localImageTime) ?></p>
+                <p><strong>Település:</strong> <?= htmlspecialchars($img['telepules_nev'] ?? 'Nincs település hozzárendelve') ?></p>
+                <p><strong>Kategóriák:</strong> <?= htmlspecialchars($img['KATEGORIANK']) ?></p>
+                <p><strong>Leírás:</strong> <?= nl2br(htmlspecialchars($img['LEIRAS'])) ?></p>
 
-    <!-- Kép adatok -->
-    <div class="image-info">
-        <h2><?= htmlspecialchars($img['CIM']) ?></h2>
-        <p><strong>Feltöltötte:</strong> <?= htmlspecialchars($img['FELHASZNALO_FELHASZNALONEV']) ?></p>
-        <p><strong>Feltöltési dátum:</strong> <?= htmlspecialchars($localImageTime) ?></p>
-        <p><strong>Település:</strong> <?= htmlspecialchars($img['telepules_nev'] ?? 'Nincs település hozzárendelve') ?></p>
-        <p><strong>Kategóriák:</strong> <?= htmlspecialchars($img['KATEGORIANK']) ?></p>
-        <p><strong>Leírás:</strong> <?= nl2br(htmlspecialchars($img['LEIRAS'])) ?></p>
+                <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
+                    <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törlöd a képet?');">
+                        <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">
+                        <button type="submit" class="delete-button">Törlés</button>
+                    </form>
+                <?php endif; ?>
+            </div>
+        </div>
 
-        <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
-            <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törlöd a képet?');">
+        <!-- Új hozzászólás -->
+        <?php if (isset($_SESSION['felhasznalo'])): ?>
+            <form action="controllers/comment_handler.php" method="post" class="comment-form">
                 <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">
-                <button type="submit" class="delete-button">Törlés</button>
+                <textarea name="szoveg" rows="4" placeholder="Írj hozzászólást..." required></textarea><br>
+                <button type="submit">Hozzászólás küldése</button>
             </form>
+        <?php else: ?>
+            <p><a href="login.php">Jelentkezz be</a> hozzászóláshoz!</p>
         <?php endif; ?>
-    </div>
-</div>
 
-<!-- Új hozzászólás -->
-<?php if (isset($_SESSION['felhasznalo'])): ?>
-    <form action="controllers/comment_handler.php" method="post" class="comment-form">
-        <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">
-        <textarea name="szoveg" rows="4" placeholder="Írj hozzászólást..." required></textarea><br>
-        <button type="submit">Hozzászólás küldése</button>
-    </form>
-<?php else: ?>
-    <p><a href="login.php">Jelentkezz be</a> hozzászóláshoz!</p>
-<?php endif; ?>
-
-<!-- Hozzászólások -->
-<div class="comments-section">
-    <h3>Hozzászólások</h3>
-    <?php
-    function renderComments($comments, $depth = 0, $parentKepId = 0) {
-        foreach ($comments as $comment) {
-            $marginLeft = $depth * 30;
-            $dt_comment = DateTime::createFromFormat("Y-m-d H:i:s", $comment['datum'], new DateTimeZone('UTC'));
-            if ($dt_comment) {
-                $dt_comment->setTimezone(new DateTimeZone('Europe/Budapest'));
-                $localCommentTime = $dt_comment->format('Y.m.d H:i:s');
-            } else {
-                $localCommentTime = htmlspecialchars($comment['datum']);
-            }
-            ?>
-            <div class="comment" style="margin-left: <?= $marginLeft ?>px;">
-                <p>
-                    <strong><?= htmlspecialchars($comment['felhasznalo_felhasznalonev']) ?></strong>
-                    <small>(<?= $localCommentTime ?>)</small>
-                    <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $comment['felhasznalo_felhasznalonev']): ?>
-                        <!-- Törlés gomb Material Symbols kukával -->
-                        <a href="controllers/comment_delete_handler.php?comment_id=<?= urlencode($comment['id']) ?>&kep_id=<?= urlencode($parentKepId) ?>"
-                           class="delete-comment"
-                           onclick="return confirm('Biztosan törlöd ezt a hozzászólást?');">
-                            <span class="material-symbols-outlined">delete</span>
-                        </a>
-                    <?php endif; ?>
-                    <!-- Válasz ikon gomb -->
-                    <?php if (isset($_SESSION['felhasznalo'])): ?>
-                        <span class="material-symbols-outlined reply-icon"
-                              onclick="toggleReplyForm(<?= $comment['id'] ?>)">
+        <!-- Hozzászólások -->
+        <div class="comments-section">
+            <h3>Hozzászólások</h3>
+            <?php
+            function renderComments($comments, $depth = 0, $parentKepId = 0) {
+                foreach ($comments as $comment) {
+                    $marginLeft = $depth * 30;
+                    $dt_comment = DateTime::createFromFormat("Y-m-d H:i:s", $comment['datum'], new DateTimeZone('UTC'));
+                    if ($dt_comment) {
+                        $dt_comment->setTimezone(new DateTimeZone('Europe/Budapest'));
+                        $localCommentTime = $dt_comment->format('Y.m.d H:i:s');
+                    } else {
+                        $localCommentTime = htmlspecialchars($comment['datum']);
+                    }
+                    ?>
+                    <div class="comment" style="margin-left: <?= $marginLeft ?>px;">
+                        <p>
+                            <strong><?= htmlspecialchars($comment['felhasznalo_felhasznalonev']) ?></strong>
+                            <small>(<?= $localCommentTime ?>)</small>
+                            <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $comment['felhasznalo_felhasznalonev']): ?>
+                                <!-- Törlés gomb Material Symbols kukával -->
+                                <a href="controllers/comment_delete_handler.php?comment_id=<?= urlencode($comment['id']) ?>&kep_id=<?= urlencode($parentKepId) ?>"
+                                   class="delete-comment"
+                                   onclick="return confirm('Biztosan törlöd ezt a hozzászólást?');">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </a>
+                            <?php endif; ?>
+                            <!-- Válasz ikon gomb -->
+                            <?php if (isset($_SESSION['felhasznalo'])): ?>
+                                <span class="material-symbols-outlined reply-icon"
+                                      onclick="toggleReplyForm(<?= $comment['id'] ?>)">
                             reply
                         </span>
-                    <?php endif; ?>
-                </p>
-                <p><?= nl2br(htmlspecialchars($comment['szoveg'])) ?></p>
+                            <?php endif; ?>
+                        </p>
+                        <p><?= nl2br(htmlspecialchars($comment['szoveg'])) ?></p>
 
-                <!-- Dinamikusan megjelenő válasz form -->
-                <form id="reply-form-<?= $comment['id'] ?>"
-                      action="controllers/comment_handler.php"
-                      method="post"
-                      class="reply-form"
-                      style="display: none;">
-                    <input type="hidden" name="kep_id" value="<?= htmlspecialchars($parentKepId) ?>">
-                    <input type="hidden" name="parent_id" value="<?= htmlspecialchars($comment['id']) ?>">
-                    <textarea name="szoveg" rows="2" placeholder="Válasz írása..." required></textarea><br>
-                    <button type="submit">Válasz küldése</button>
-                </form>
+                        <!-- Dinamikusan megjelenő válasz form -->
+                        <form id="reply-form-<?= $comment['id'] ?>"
+                              action="controllers/comment_handler.php"
+                              method="post"
+                              class="reply-form"
+                              style="display: none;">
+                            <input type="hidden" name="kep_id" value="<?= htmlspecialchars($parentKepId) ?>">
+                            <input type="hidden" name="parent_id" value="<?= htmlspecialchars($comment['id']) ?>">
+                            <textarea name="szoveg" rows="2" placeholder="Válasz írása..." required></textarea><br>
+                            <button type="submit">Válasz küldése</button>
+                        </form>
 
-                <?php if (!empty($comment['replies'])) {
-                    renderComments($comment['replies'], $depth + 1, $parentKepId);
-                } ?>
-            </div>
-            <?php
-        }
-    }
-    renderComments($commentTree, 0, $img['ID']);
-    ?>
+                        <?php if (!empty($comment['replies'])) {
+                            renderComments($comment['replies'], $depth + 1, $parentKepId);
+                        } ?>
+                    </div>
+                    <?php
+                }
+            }
+            renderComments($commentTree, 0, $img['ID']);
+            ?>
+        </div>
+
+        <!-- JavaScript a válasz mező dinamikus megjelenítéséhez -->
+        <script>
+            function toggleReplyForm(commentId) {
+                var form = document.getElementById('reply-form-' + commentId);
+                if (form.style.display === 'none' || form.style.display === '') {
+                    form.style.display = 'block';
+                } else {
+                    form.style.display = 'none';
+                }
+            }
+        </script>
+    </div>
+    <footer>
+        <p>&copy; 2025 Fénykép Albumok. Minden jog fenntartva.</p>
+    </footer>
 </div>
 
-<!-- JavaScript a válasz mező dinamikus megjelenítéséhez -->
-<script>
-    function toggleReplyForm(commentId) {
-        var form = document.getElementById('reply-form-' + commentId);
-        if (form.style.display === 'none' || form.style.display === '') {
-            form.style.display = 'block';
-        } else {
-            form.style.display = 'none';
-        }
-    }
-</script>
 
-<footer>
-    <p>&copy; 2025 Fénykép Albumok. Minden jog fenntartva.</p>
-</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

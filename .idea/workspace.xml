@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="Statistic, Fixing Footer, Edited Profile Menu, Admin Panel, Icon/Banner">
-      <change afterPath="$PROJECT_DIR$/pages/album_preview.php" afterDir="false" />
+    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="Album preview, fixing album elements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/db.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/album_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album_list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile_created_albums.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile_created_albums.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/photo_review.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/photo_review.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +105,7 @@
       <workItem from="1745571534170" duration="5396000" />
       <workItem from="1745578715521" duration="145000" />
       <workItem from="1745580263109" duration="48888000" />
-      <workItem from="1745749578526" duration="3175000" />
+      <workItem from="1745749578526" duration="5076000" />
     </task>
     <task id="LOCAL-00001" summary="Updating the main site and additional changes">
       <option name="closed" value="true" />
@@ -190,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745691909535</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Album preview, fixing album elements">
+      <option name="closed" value="true" />
+      <created>1745752850561</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745752850561</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,7 +240,8 @@
     <MESSAGE value="Photo review, Commenting, Reply/Delete" />
     <MESSAGE value="Description of the image fixed" />
     <MESSAGE value="Statistic, Fixing Footer, Edited Profile Menu, Admin Panel, Icon/Banner" />
-    <option name="LAST_COMMIT_MESSAGE" value="Statistic, Fixing Footer, Edited Profile Menu, Admin Panel, Icon/Banner" />
+    <MESSAGE value="Album preview, fixing album elements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Album preview, fixing album elements" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

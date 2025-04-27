@@ -72,3 +72,33 @@ if (isset($_POST['remove_admin'])) {
         exit;
     }
 }
+
+if (isset($_POST['delete_user'])) {
+    $felhasznalo = $_POST['felhasznalo'];
+
+    $sql_check = "SELECT * FROM FELHASZNALO WHERE FELHASZNALONEV = :felhasznalo";
+    $stid_check = oci_parse($conn, $sql_check);
+    oci_bind_by_name($stid_check, ':felhasznalo', $felhasznalo);
+    oci_execute($stid_check);
+    $user = oci_fetch_assoc($stid_check);
+
+    if ($user) {
+        $sql_delete = "DELETE FROM FELHASZNALO WHERE FELHASZNALONEV = :felhasznalo";
+        $stid_delete = oci_parse($conn, $sql_delete);
+        oci_bind_by_name($stid_delete, ':felhasznalo', $felhasznalo);
+
+        if (oci_execute($stid_delete)) {
+            $_SESSION['message'] = "A felhasználó sikeresen törölve lett!";
+            header("Location: " . BASE_URL . "pages/admin_panel.php");
+            exit;
+        } else {
+            $_SESSION['hiba'] = "Hiba történt a felhasználó törlésénél!";
+            header("Location: " . BASE_URL . "pages/admin_panel.php");
+            exit;
+        }
+    } else {
+        $_SESSION['hiba'] = "A kiválasztott felhasználó nem található!";
+        header("Location: " . BASE_URL . "pages/admin_panel.php");
+        exit;
+    }
+}

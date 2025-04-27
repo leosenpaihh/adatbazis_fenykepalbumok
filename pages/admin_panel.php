@@ -89,6 +89,21 @@ if (isset($_SESSION['hiba'])) {
 
         <?php endif; ?>
 
+        <form action="<?php echo BASE_URL; ?>controllers/admin_panel_handler.php" method="post">
+            <label for="felhasznalo">Válassz felhasználót a törléshez:</label>
+            <select name="felhasznalo" id="felhasznalo_to_delete">
+                <?php
+                $stid = oci_parse($conn, "SELECT FELHASZNALONEV, VEZETEKNEV, KERESZTNEV FROM FELHASZNALO WHERE ADMIN = 0");
+                oci_execute($stid);
+                while ($row = oci_fetch_assoc($stid)) {
+                    echo "<option value='" . htmlspecialchars($row['FELHASZNALONEV']) . "'>" . htmlspecialchars($row['VEZETEKNEV']) . " " . htmlspecialchars($row['KERESZTNEV']) . "</option>";
+                }
+                ?>
+            </select><br><br>
+
+            <input type="submit" name="delete_user" value="Felhasználó törlése">
+        </form>
+
     </div>
 
     <footer>

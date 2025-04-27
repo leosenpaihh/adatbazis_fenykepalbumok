@@ -56,7 +56,7 @@ if (isset($_SESSION['hiba'])) {
                 <label for="felhasznalo">Válassz felhasználót:</label>
                 <select name="felhasznalo" id="felhasznalo">
                     <?php
-                    $stid = oci_parse($conn, "SELECT FELHASZNALONEV, VEZETEKNEV, KERESZTNEV FROM FELHASZNALO WHERE ADMIN = 0");
+                    $stid = oci_parse($conn, "SELECT FELHASZNALONEV, VEZETEKNEV, KERESZTNEV FROM FELHASZNALO");
                     oci_execute($stid);
                     while ($row = oci_fetch_assoc($stid)) {
                         echo "<option value='" . htmlspecialchars($row['FELHASZNALONEV']) . "'>" . htmlspecialchars($row['VEZETEKNEV']) . " " . htmlspecialchars($row['KERESZTNEV']) . "</option>";
@@ -71,21 +71,6 @@ if (isset($_SESSION['hiba'])) {
                 </select><br><br>
 
                 <input type="submit" name="update_admin" value="Admin jogok módosítása">
-            </form>
-
-            <form action="<?php echo BASE_URL; ?>controllers/admin_panel_handler.php" method="post">
-                <label for="felhasznalo">Válassz felhasználót:</label>
-                <select name="felhasznalo" id="felhasznalo">
-                    <?php
-                    $stid = oci_parse($conn, "SELECT FELHASZNALONEV, VEZETEKNEV, KERESZTNEV FROM FELHASZNALO WHERE ADMIN = 1");
-                    oci_execute($stid);
-                    while ($row = oci_fetch_assoc($stid)) {
-                        echo "<option value='" . htmlspecialchars($row['FELHASZNALONEV']) . "'>" . htmlspecialchars($row['VEZETEKNEV']) . " " . htmlspecialchars($row['KERESZTNEV']) . "</option>";
-                    }
-                    ?>
-                </select><br><br>
-
-                <input type="submit" name="remove_admin" value="Admin jogok eltávolítása">
             </form>
 
         <?php endif; ?>

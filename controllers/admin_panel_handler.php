@@ -44,35 +44,6 @@ if (isset($_POST['update_admin'])) {
     }
 }
 
-if (isset($_POST['remove_admin'])) {
-    $felhasznalo = $_POST['felhasznalo'];
-
-    $sql_check = "SELECT * FROM FELHASZNALO WHERE FELHASZNALONEV = :felhasznalo AND ADMIN = 1";
-    $stid_check = oci_parse($conn, $sql_check);
-    oci_bind_by_name($stid_check, ':felhasznalo', $felhasznalo);
-    oci_execute($stid_check);
-    $user = oci_fetch_assoc($stid_check);
-
-    if ($user) {
-        $sql_update = "UPDATE FELHASZNALO SET ADMIN = 0 WHERE FELHASZNALONEV = :felhasznalo";
-        $stid_update = oci_parse($conn, $sql_update);
-        oci_bind_by_name($stid_update, ':felhasznalo', $felhasznalo);
-        if (oci_execute($stid_update)) {
-            $_SESSION['message'] = "A felhasználó admin jogai sikeresen eltávolítva!";
-            header("Location: " . BASE_URL . "pages/admin_panel.php");
-            exit;
-        } else {
-            $_SESSION['hiba'] = "Hiba történt a felhasználó admin jogainak eltávolítása során!";
-            header("Location: " . BASE_URL . "pages/admin_panel.php");
-            exit;
-        }
-    } else {
-        $_SESSION['hiba'] = "A kiválasztott felhasználó nem admin!";
-        header("Location: " . BASE_URL . "pages/admin_panel.php");
-        exit;
-    }
-}
-
 if (isset($_POST['delete_user'])) {
     $felhasznalo = $_POST['felhasznalo'];
 

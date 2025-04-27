@@ -3,7 +3,7 @@ require_once '../includes/base.php';  // BASE_URL tartalmazza: http://localhost/
 session_start();
 include('../includes/db.php');
 
-if (empty($_SESSION['felhasznalo']) || $_SESSION['felhasznalo']['admin'] != 1) {
+if (empty($_SESSION['felhasznalo'])) {
     header("Location: " . BASE_URL . "pages/login.php");
     exit;
 }

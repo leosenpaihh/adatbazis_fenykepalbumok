@@ -5,7 +5,12 @@ include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: pages/login.php");
+    header("Location: " . BASE_URL . "pages/login.php");
+    exit;
+}
+
+if ($_SESSION['felhasznalo']['admin'] != 1) {
+    header("Location: " . BASE_URL . "index.php");
     exit;
 }
 

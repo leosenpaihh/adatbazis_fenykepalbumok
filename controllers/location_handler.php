@@ -4,7 +4,13 @@ session_start();
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: " . BASE_URL . "pages/login.php");    exit;
+    header("Location: " . BASE_URL . "pages/login.php");
+    exit;
+}
+
+if ($_SESSION['felhasznalo']['admin'] != 1) {
+    header("Location: " . BASE_URL . "index.php");
+    exit;
 }
 
 if (isset($_POST['torles']) && empty($hibak)) {

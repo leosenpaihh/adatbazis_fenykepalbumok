@@ -26,10 +26,14 @@ if (empty($_SESSION['felhasznalo']) || $_SESSION['felhasznalo']['admin'] != 1) {
     <div class="wrapper">
         <h1>Admin Panel</h1>
 
-        <?php if (!empty($_SESSION['felhasznalo']['admin']) && $_SESSION['felhasznalo']['admin'] == 1): ?>
+        <?php if (!empty($_SESSION['felhasznalo']['admin'])): ?>
             <h2>Kategóriák kezelése</h2>
-            <form action="<?php echo BASE_URL; ?>/pages/category.php" method="get">
+            <form action="<?php echo BASE_URL; ?>pages/category.php" method="get">
                 <button type="submit">Menj a Kategóriákhoz</button>
+            </form>
+            <h2>Települések kezelése</h2>
+            <form action="<?php echo BASE_URL; ?>pages/location.php" method="get">
+                <button type="submit">Menj a Települések oldalra</button>
             </form>
         <?php endif; ?>
 

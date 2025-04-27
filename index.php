@@ -85,6 +85,23 @@ $kategoriak = [];
 while ($row = oci_fetch_array($stidKategoria, OCI_ASSOC)) {
     $kategoriak[] = $row;
 }
+
+$prErtekelesek = null;
+if (isset($_SESSION['felhasznalo'])) {
+    $ertekelesek = [];
+    $queryErtekeles = "SELECT * FROM ERTEKELES WHERE FELHASZNALO_FELHASZNALONEV = :felhasznalonev";
+
+    $stidErtekeles = oci_parse($conn, $queryErtekeles);
+    oci_bind_by_name($stidErtekeles, ':felhasznalonev', $_SESSION['felhasznalo']['felhasznalonev']);
+    oci_execute($stidErtekeles);
+
+    $ertekelesek = oci_fetch_assoc($stidErtekeles);
+
+    $prErtekelesek = array(
+        $ertekelesek["KEP_ID"] => $ertekelesek["PONTSZAM"]
+    );
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -94,6 +111,7 @@ while ($row = oci_fetch_array($stidKategoria, OCI_ASSOC)) {
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" href="styles/favicon.ico" type="image/ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <base href="<?php echo BASE_URL; ?>">
 </head>
 <body>
@@ -179,6 +197,29 @@ include __DIR__ . '/pages/shared/menu.php';
                         }
                         ?>
                     </p>
+                    <?php if (isset($_SESSION['felhasznalo'])): ?>
+                    <form method="POST" action="controllers/rating_handler.php?kep_id=<?php echo $img['ID']; ?>">
+                        <div class="rating">
+                            <?php if (!isset($prErtekelesek[$img['ID']])): ?>
+                            <button name="letrehozas" type="submit" class="rating-button" title="Értékelés hozzáadása">
+                                <i class="fa fa-check"></i>
+                            </button>
+                            <?php else: ?>
+                            <button name="modositas" type="submit" class="rating-button" title="Értékelés módosítása">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button name="torles" type="submit" class="rating-button" title="Értékelés törlése">
+                                <i class="fa fa-x"></i>
+                            </button>
+                            <?php endif; ?>
+                            <input type="radio" id="star5" name="rating" value="5" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 5) ? 'checked' : ''; ?> /><label for="star5" title="5"><i class="fa-solid fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 4) ? 'checked' : ''; ?> /><label for="star4" title="4"><i class="fa-solid fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 3) ? 'checked' : ''; ?> /><label for="star3" title="3"><i class="fa-solid fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 2) ? 'checked' : ''; ?> /><label for="star2" title="2"><i class="fa-solid fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1" <?php echo (isset($prErtekelesek[$img['ID']]) && $prErtekelesek[$img['ID']] == 1) ? 'checked' : ''; ?> /><label for="star1" title="1"><i class="fa-solid fa-star"></i></label>
+                        </div>
+                    </form>
+                    <?php endif ; ?>
                     <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
                         <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törölni szeretnéd a képet?');" class="location_torles">
                             <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">

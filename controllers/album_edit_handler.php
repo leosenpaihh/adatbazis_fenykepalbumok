@@ -9,6 +9,7 @@ if (!isset($_SESSION['felhasznalo'])) {
 }
 
 $album_id = $_POST['album_id'] ?? null;
+$album_owner = $_POST['album_owner'] ?? null;
 $album_nev = $_POST['album_nev'] ?? null;
 $album_leiras = $_POST['album_leiras'] ?? null;
 $kepek = $_POST['kepek'] ?? [];
@@ -19,10 +20,11 @@ if (!$album_id || !$album_nev) {
     exit;
 }
 
-$sql_check = "SELECT * FROM FENYKEPALBUM WHERE ID = :album_id AND FELHASZNALO_FELHASZNALONEV = :felhasznalonev";
+$sql_check = "SELECT * FROM FENYKEPALBUM WHERE ID = :album_id AND (FELHASZNALO_FELHASZNALONEV = :felhasznalonev OR :admin = 1)";
 $stid_check = oci_parse($conn, $sql_check);
 oci_bind_by_name($stid_check, ':album_id', $album_id);
-oci_bind_by_name($stid_check, ':felhasznalonev', $_SESSION['felhasznalo']['felhasznalonev']);
+oci_bind_by_name($stid_check, ':felhasznalonev', $album_owner);
+oci_bind_by_name($stid_check, ':admin', $_SESSION['felhasznalo']['admin']);
 oci_execute($stid_check);
 $album = oci_fetch_assoc($stid_check);
 
@@ -39,7 +41,7 @@ $stid_update = oci_parse($conn, $sql_update);
 oci_bind_by_name($stid_update, ':album_nev', $album_nev);
 oci_bind_by_name($stid_update, ':album_leiras', $album_leiras);
 oci_bind_by_name($stid_update, ':album_id', $album_id);
-oci_bind_by_name($stid_update, ':felhasznalonev', $_SESSION['felhasznalo']['felhasznalonev']);
+oci_bind_by_name($stid_update, ':felhasznalonev', $album_owner);
 
 if (oci_execute($stid_update)) {
     $sql_existing = "SELECT KEP_ID FROM KEPFENYKEPALBUM WHERE FENYKEPALBUM_ID = :album_id";
@@ -89,6 +91,6 @@ if (oci_execute($stid_update)) {
     exit;
 } else {
     $_SESSION['hiba'] = "Hiba történt az album módosítása során!";
-    header("Location: " . BASE_URL . "pages/album_edit.php?album_id=" . $album_id);
+    header("Location: " . BASE_URL . "pages/album_edit.php?album_id=" . intval($album_id) . "&album_owner=" . htmlspecialchars($album_owner));
     exit;
 }

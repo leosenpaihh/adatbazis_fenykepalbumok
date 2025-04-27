@@ -95,10 +95,11 @@ if (isset($_SESSION['hiba'])) {
                     <div class="album-footer">
                         <p>Készítette: <?= htmlspecialchars($row['FELHASZNALO_FELHASZNALONEV']) ?></p>
                         <?php
-                        if (strtolower($row['FELHASZNALO_FELHASZNALONEV']) === strtolower($_SESSION['felhasznalo']['felhasznalonev'])):
+                        if (strtolower($row['FELHASZNALO_FELHASZNALONEV']) === strtolower($_SESSION['felhasznalo']['felhasznalonev']) || $_SESSION['felhasznalo']['admin'] == 1):
                             ?>
                             <form action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post"
                                   style="display:inline-block;" class="location_torles">
+                                <input type="hidden" name="album_owner" value="<?= htmlspecialchars($row['FELHASZNALO_FELHASZNALONEV']) ?>">
                                 <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
                                 <input type="submit" name="edit" value="Módosítás">
                             </form>

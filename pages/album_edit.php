@@ -10,15 +10,20 @@ if (!isset($_SESSION['felhasznalo'])) {
 }
 
 $album_id = $_GET['album_id'] ?? null;
-if (!$album_id) {
+$album_owner = $_GET['album_owner'] ?? null;
+
+if (!$album_id || !$album_owner) {
     header("Location: " . BASE_URL . "pages/album_list.php");
     exit;
 }
 
-$sql = "SELECT * FROM FENYKEPALBUM WHERE ID = :album_id AND FELHASZNALO_FELHASZNALONEV = :felhasznalonev";
+$sql = "SELECT * FROM FENYKEPALBUM 
+        WHERE ID = :album_id 
+        AND (FELHASZNALO_FELHASZNALONEV = :felhasznalonev OR :admin = 1)";
 $stid = oci_parse($conn, $sql);
 oci_bind_by_name($stid, ':album_id', $album_id);
 oci_bind_by_name($stid, ':felhasznalonev', $_SESSION['felhasznalo']['felhasznalonev']);
+oci_bind_by_name($stid, ':admin', $_SESSION['felhasznalo']['admin']);
 oci_execute($stid);
 $album = oci_fetch_assoc($stid);
 
@@ -34,7 +39,7 @@ $sql_images = "SELECT * FROM KEP
                WHERE FELHASZNALO_FELHASZNALONEV = :felhasznalonev 
                AND ID NOT IN (SELECT KEP_ID FROM KEPFENYKEPALBUM WHERE FENYKEPALBUM_ID = :album_id)";
 $stid_images = oci_parse($conn, $sql_images);
-oci_bind_by_name($stid_images, ':felhasznalonev', $_SESSION['felhasznalo']['felhasznalonev']);
+oci_bind_by_name($stid_images, ':felhasznalonev', $album_owner);
 oci_bind_by_name($stid_images, ':album_id', $album_id);
 oci_execute($stid_images);
 ?>
@@ -66,7 +71,7 @@ oci_execute($stid_images);
     <?php
     $sql_kepek = "SELECT * FROM KEP WHERE FELHASZNALO_FELHASZNALONEV = :felhasznalonev";
     $stid_kepek = oci_parse($conn, $sql_kepek);
-    oci_bind_by_name($stid_kepek, ':felhasznalonev', $_SESSION['felhasznalo']['felhasznalonev']);
+    oci_bind_by_name($stid_kepek, ':felhasznalonev', $album_owner);
     oci_execute($stid_kepek);
 
     $sql_album_kepek = "SELECT KEP_ID FROM KEPFENYKEPALBUM WHERE FENYKEPALBUM_ID = :album_id";

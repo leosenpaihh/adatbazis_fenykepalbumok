@@ -1,5 +1,6 @@
 <?php
 require_once '../includes/base.php';
+header("Location: " . BASE_URL . "index.php");
 
 session_start();
 if (!isset($_SESSION['felhasznalo'])) {

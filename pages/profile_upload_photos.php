@@ -91,7 +91,9 @@ while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_LOBS)) {
                             <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
                                 <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törölni szeretnéd a képet?');" class="location_torles">
                                     <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">
-                                    <button type="submit" class="delete-button">Törlés</button>
+                                    <button type="submit" class="delete-button">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
                                 </form>
                             <?php endif; ?>
                         </div>

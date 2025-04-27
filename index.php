@@ -181,7 +181,7 @@ include __DIR__ . '/pages/shared/menu.php';
                     // Link hozzáadása a képre kattintás esetén
                     echo "<a href='pages/photo_review.php?kep_id=" . urlencode($img['ID']) . "'><img src='data:image/jpeg;base64,{$base64}' alt='" . htmlspecialchars($img['CIM']) . "'></a>";
                 } else {
-                    echo "Nincs kép";
+                    echo "<a href='pages/photo_review.php?kep_id=" . urlencode($img['ID']) . "'>Nincs kép</a>";
                 }
                 ?>
                 <div class="metadata">
@@ -216,8 +216,10 @@ include __DIR__ . '/pages/shared/menu.php';
                     <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
                         <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törölni szeretnéd a képet?');" class="location_torles">
                             <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">
-                            <button type="submit" class="delete-button">Törlés</button>
-                        </form>
+                    <button type="submit" class="delete-button">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </form>
                     <?php endif; ?>
                 </div>
             </div>

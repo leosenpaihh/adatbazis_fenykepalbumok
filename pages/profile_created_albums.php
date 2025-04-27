@@ -160,14 +160,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['album_id'])) {
                                   style="display:inline-block;" class="location_torles">
                                 <input type="hidden" name="album_owner" value="<?= htmlspecialchars($row['FELHASZNALO_FELHASZNALONEV']) ?>">
                                 <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
-                                <input type="submit" name="edit" value="Módosítás">
+                                <button type="submit" name="edit" class="edit-button">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
                             </form>
                             <form action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post"
                                   style="display:inline-block;"
                                   onsubmit="return confirm('Biztosan törölni szeretnéd ezt az albumot? Ez a művelet nem visszavonható!');"
                                   class="location_torles">
                                 <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
-                                <input type="submit" name="delete" value="Törlés">
+                                <button type="submit" name="delete" class="delete-button">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
                             </form>
                         <?php endif; ?>
                     </div>

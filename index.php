@@ -95,12 +95,14 @@ if (isset($_SESSION['felhasznalo'])) {
     oci_bind_by_name($stidErtekeles, ':felhasznalonev', $_SESSION['felhasznalo']['felhasznalonev']);
     oci_execute($stidErtekeles);
 
-    $ertekelesek = oci_fetch_assoc($stidErtekeles);
+    while ($sor = oci_fetch_assoc($stidErtekeles)) {
+        $ertekelesek[] = $sor;
+    }
 
     if ($ertekelesek) {
-        $prErtekelesek = array(
-            $ertekelesek["KEP_ID"] => $ertekelesek["PONTSZAM"]
-        );
+        foreach ($ertekelesek as $ertekeles) {
+            $prErtekelesek[$ertekeles["KEP_ID"]] = $ertekeles["PONTSZAM"];
+        }
     } else {
         $prErtekelesek = [];
     }
@@ -191,7 +193,7 @@ include __DIR__ . '/pages/shared/menu.php';
                     <p><strong>Leírás:</strong>
                         <?php
                         $maxLength = 100;
-                        $leiras = htmlspecialchars($img['LEIRAS']);
+                        $leiras = htmlspecialchars($img['LEIRAS'] ?? 'Nincs megadva leírás');
                         if (mb_strlen($leiras) > $maxLength) {
                             $roviditett = mb_substr($leiras, 0, $maxLength) . '...';
                             echo nl2br($roviditett);

@@ -146,7 +146,7 @@ if (isset($_SESSION['felhasznalo'])) {
                 <p><strong>Feltöltési dátum:</strong> <?= htmlspecialchars($localImageTime) ?></p>
                 <p><strong>Település:</strong> <?= htmlspecialchars($img['telepules_nev'] ?? 'Nincs település hozzárendelve') ?></p>
                 <p><strong>Kategóriák:</strong> <?= htmlspecialchars($img['KATEGORIANK']) ?></p>
-                <p><strong>Leírás:</strong> <?= nl2br(htmlspecialchars($img['LEIRAS'])) ?></p>
+                <p><strong>Leírás:</strong> <?= nl2br(htmlspecialchars($img['LEIRAS'] ?? 'Nincs megadva leírás')) ?></p>
 
         <?php if (isset($_SESSION['felhasznalo'])): ?>
         <form method="POST" action="controllers/rating_handler.php?kep_id=<?php echo $img['ID']; ?>">

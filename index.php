@@ -97,9 +97,13 @@ if (isset($_SESSION['felhasznalo'])) {
 
     $ertekelesek = oci_fetch_assoc($stidErtekeles);
 
-    $prErtekelesek = array(
-        $ertekelesek["KEP_ID"] => $ertekelesek["PONTSZAM"]
-    );
+    if ($ertekelesek) {
+        $prErtekelesek = array(
+            $ertekelesek["KEP_ID"] => $ertekelesek["PONTSZAM"]
+        );
+    } else {
+        $prErtekelesek = [];
+    }
 }
 
 ?>

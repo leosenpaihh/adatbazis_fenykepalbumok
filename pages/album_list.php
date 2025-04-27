@@ -97,12 +97,15 @@ if (isset($_SESSION['hiba'])) {
                         <?php
                         if (strtolower($row['FELHASZNALO_FELHASZNALONEV']) === strtolower($_SESSION['felhasznalo']['felhasznalonev'])):
                             ?>
-                            <form action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post" style="display:inline-block;">
+                            <form action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post"
+                                  style="display:inline-block;" class="location_torles">
                                 <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
                                 <input type="submit" name="edit" value="Módosítás">
                             </form>
-                            <form action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post" style="display:inline-block;"
-                                  onsubmit="return confirm('Biztosan törölni szeretnéd ezt az albumot? Ez a művelet nem visszavonható!');">
+                            <form action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post"
+                                  style="display:inline-block;"
+                                  onsubmit="return confirm('Biztosan törölni szeretnéd ezt az albumot? Ez a művelet nem visszavonható!');"
+                                  class="location_torles">
                                 <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
                                 <input type="submit" name="delete" value="Törlés">
                             </form>

@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <?php if (isset($_SESSION['felhasznalo'])): ?>
 
         <?php if (!empty($_SESSION['felhasznalo']['admin']) && $_SESSION['felhasznalo']['admin'] == 1): ?>
-<!--            <a href="pages/category.php">Kategória létrehozása</a>-->
+            <a href="pages/category.php">Kategória létrehozása</a>
             <a href="pages/location.php">Település hozzáadása</a>
             <a href="pages/admin_panel.php">Admin Panel</a>
         <?php endif; ?>

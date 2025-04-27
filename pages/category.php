@@ -1,15 +1,13 @@
 <?php
 require_once '../includes/base.php';
-header("Location: " . BASE_URL . "index.php");
-
 session_start();
-if (!isset($_SESSION['felhasznalo'])) {
-    header("Location: " . BASE_URL . "pages/login.php");
-    exit;
-}
-
 include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
+
+if (!isset($_SESSION['felhasznalo'])) {
+    header("Location: pages/login.php");
+    exit;
+}
 
 if (isset($_SESSION['hiba'])) {
     echo "<p>" . $_SESSION['hiba'] . "</p>";
@@ -20,6 +18,13 @@ if (isset($_SESSION['message'])) {
     echo "<p>" . $_SESSION['message'] . "</p>";
     unset($_SESSION['message']);
 }
+
+$stid = oci_parse($conn, "SELECT * FROM KATEGORIA");
+oci_execute($stid);
+while ($row = oci_fetch_assoc($stid)) {
+    $kategoriak[] = $row;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -29,25 +34,64 @@ if (isset($_SESSION['message'])) {
     <link rel="icon" href="../styles/favicon.ico" type="image/ico">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="category.js"></script>
     <title>Kategória létrehozása</title>
     <base href="<?php echo BASE_URL; ?>">
 </head>
 <body>
+<h1>Kategória létrehozása</h1>
 
+<form action="<?php echo BASE_URL; ?>controllers/category_handler.php" method="post">
+    <label for="nev">Kategória neve:</label><br>
+    <input type="text" id="nev" name="nev" required maxlength="100"><br>
 
-<div class="page-container">
-    <div class="wrapper">
-        <h1>Kategória létrehozása</h1>
-        <form action="controllers/category_handler.php" method="post">
-            <label for="nev">Kategória neve:</label><br>
-            <input type="text" id="nev" name="nev" required maxlength="100"><br>
-            <input type="submit" value="Kategória létrehozása">
-        </form>
-    </div>
-    <footer>
-        <p>&copy; 2025 Fénykép Albumok. Minden jog fenntartva.</p>
-    </footer>
+    <input type="submit" name="letrehozas" value="Kategória létrehozása">
+</form>
+<h2>Létrehozott kategóriák</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Név</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php if (count($kategoriak) > 0): ?>
+        <?php foreach ($kategoriak as $kategoria): ?>
+            <tr>
+                <td><?= htmlspecialchars($kategoria['NEV']) ?></td>
+                <td>
+                    <button onclick='modifyCategory(<?= json_encode($kategoria["NEV"]) ?>)'>
+                        Módosítás
+                    </button>
+                </td>
+                <td>
+                    <form action="<?php echo BASE_URL; ?>controllers/category_handler.php" method="post" class="location_torles">
+                        <input type="hidden" id="nev" name="nev" value='<?= $kategoria["NEV"] ?>'>
+
+                        <input type="submit" name="torles" value="Törlés">
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="3">Nincsenek kategóriák.</td>
+        </tr>
+    <?php endif; ?>
+    </tbody>
+</table>
+<hr />
+<div id="modositas_form" style="display: none">
+    <form action="<?php echo BASE_URL; ?>controllers/category_handler.php" method="post">
+        <label for="nev">Módosítsd a kategória nevét:</label><br>
+        <input type="text" id="modositas_nev" name="nev" required maxlength="100"><br>
+        <input type="hidden" id="eredeti_nev" name="eredeti_nev" value="">
+
+        <input type="submit" name="modositas" value="Módosítás mentése">
+    </form>
+    <button name="megse" onclick="closeModificationForm()">Mégse</button>
 </div>
-
 </body>
 </html>

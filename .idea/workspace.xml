@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="Adding icons, fixing the category/location style">
+    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="Yet again some button fixes...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/db.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/album_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album_list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile_created_albums.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile_created_albums.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile_upload_photos.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile_upload_photos.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +118,7 @@
       <workItem from="1745578715521" duration="145000" />
       <workItem from="1745580263109" duration="48888000" />
       <workItem from="1745749578526" duration="5076000" />
-      <workItem from="1745763933068" duration="9633000" />
+      <workItem from="1745763933068" duration="13190000" />
     </task>
     <task id="LOCAL-00001" summary="Updating the main site and additional changes">
       <option name="closed" value="true" />
@@ -219,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745782174465</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Yet again some button fixes...">
+      <option name="closed" value="true" />
+      <created>1745783283143</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745783283143</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,7 +271,8 @@
     <MESSAGE value="Statistic, Fixing Footer, Edited Profile Menu, Admin Panel, Icon/Banner" />
     <MESSAGE value="Album preview, fixing album elements" />
     <MESSAGE value="Adding icons, fixing the category/location style" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding icons, fixing the category/location style" />
+    <MESSAGE value="Yet again some button fixes..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Yet again some button fixes..." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

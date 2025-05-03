@@ -119,6 +119,19 @@ if (isset($_SESSION['felhasznalo'])) {
     }
 }
 
+$queryPopular = "SELECT t.telepules, COUNT(k.id) AS kep_szam
+                 FROM Telepules t
+                 JOIN Kep k ON t.id = k.telepules_id
+                 JOIN Felhasznalo f ON k.felhasznalo_felhasznalonev = f.felhasznalonev
+                 WHERE f.telepules_id != t.id
+                 GROUP BY t.telepules
+                 ORDER BY kep_szam DESC
+                 FETCH FIRST 1 ROWS ONLY";
+
+$stid = oci_parse($conn, $queryPopular);
+oci_execute($stid);
+$popular = oci_fetch_assoc($stid);
+
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -177,6 +190,25 @@ include __DIR__ . '/pages/shared/menu.php';
                     </a>
                 </li>
             <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="box">
+        <h3>Legnépszerűbb úticél</h3>
+        <ul>
+            <?php if ($popular): ?>
+                <?php
+                $isActive = (isset($_GET['telepules']) && $_GET['telepules'] === $telepules['TELEPULES']) ? 'active' : '';
+                ?>
+                <li>
+                    <a href="?telepules=<?= urlencode($popular['TELEPULES']) ?>" class="<?= $isActive ?>">
+                        <?= htmlspecialchars($popular['TELEPULES']) ?> (<?= htmlspecialchars($popular['KEP_SZAM']) ?>)
+                    </a>
+                </li>
+            <?php else: ?>
+                <li>
+                    <a href="#">Nincs népszerű úticél</a>
+                </li>
+            <?php endif; ?>
         </ul>
     </div>
 </div>

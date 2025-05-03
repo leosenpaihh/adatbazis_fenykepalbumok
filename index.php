@@ -54,34 +54,46 @@ while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_LOBS)) {
 }
 
 // Települések lekérdezése
-$queryTelepules = "SELECT 
-                      t.telepules, 
-                      COUNT(k.id) AS FOTO_SZAM 
-                   FROM Telepules t 
-                   LEFT JOIN Kep k ON t.id = k.telepules_id 
-                   GROUP BY t.telepules 
+$queryTelepules = "SELECT t.telepules, t.id
+                   FROM Telepules t
                    ORDER BY t.telepules ASC";
 
 $stidTelepules = oci_parse($conn, $queryTelepules);
 oci_execute($stidTelepules);
 $telepulesek = [];
 while ($row = oci_fetch_array($stidTelepules, OCI_ASSOC)) {
+    $sql_fuggveny = "BEGIN :szam := img_count_at_location(:telepules_id); END;";
+    $stid_fuggveny = oci_parse($conn, $sql_fuggveny);
+
+    $row['FOTO_SZAM'] = 0;
+
+    oci_bind_by_name($stid_fuggveny, ':telepules_id', $row['ID']);
+    oci_bind_by_name($stid_fuggveny, ':szam', $row['FOTO_SZAM'], 32);
+
+    oci_execute($stid_fuggveny);
+
     $telepulesek[] = $row;
 }
 
 // Kategóriák lekérdezése
-$queryKategoria = "SELECT 
-                      k.nev AS KATEGORIA_NEV, 
-                      COUNT(kk.kep_id) AS FOTO_SZAM 
-                   FROM Kategoria k 
-                   LEFT JOIN KepKategoria kk ON k.nev = kk.kategoria_nev 
-                   GROUP BY k.nev 
+$queryKategoria = "SELECT k.nev as KATEGORIA_NEV
+                   FROM KATEGORIA k
                    ORDER BY k.nev ASC";
 
 $stidKategoria = oci_parse($conn, $queryKategoria);
 oci_execute($stidKategoria);
 $kategoriak = [];
 while ($row = oci_fetch_array($stidKategoria, OCI_ASSOC)) {
+    $sql_fuggveny = "BEGIN :szam := img_count_in_category(:category_name); END;";
+    $stid_fuggveny = oci_parse($conn, $sql_fuggveny);
+
+    $row['FOTO_SZAM'] = 0;
+
+    oci_bind_by_name($stid_fuggveny, ':category_name', $row['KATEGORIA_NEV']);
+    oci_bind_by_name($stid_fuggveny, ':szam', $row['FOTO_SZAM'], 32);
+
+    oci_execute($stid_fuggveny);
+
     $kategoriak[] = $row;
 }
 

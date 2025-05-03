@@ -78,7 +78,7 @@ while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_LOBS)) {
                             <p><strong>Leírás:</strong>
                                 <?php
                                 $maxLength = 100;
-                                $leiras = htmlspecialchars($img['LEIRAS']);
+                                $leiras = htmlspecialchars($img['LEIRAS'] ?? 'Nincs leírás');
                                 if (mb_strlen($leiras) > $maxLength) {
                                     $roviditett = mb_substr($leiras, 0, $maxLength) . '...';
                                     echo nl2br($roviditett);

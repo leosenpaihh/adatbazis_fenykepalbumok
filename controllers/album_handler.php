@@ -14,22 +14,25 @@ if ($_POST['muv'] === 'letrehozas') {
     $valasztott_kepek = $_POST['kepek'] ?? [];
     $felhasznalonev = $_SESSION['felhasznalo']['felhasznalonev'];
 
-    $ellenorzes = oci_parse($conn, "SELECT COUNT(*) AS CNT FROM FENYKEPALBUM WHERE NEV = :nev AND FELHASZNALO_FELHASZNALONEV = :fnev");
-    oci_bind_by_name($ellenorzes, ":nev", $nev);
-    oci_bind_by_name($ellenorzes, ":fnev", $felhasznalonev);
-    oci_execute($ellenorzes);
-    $row = oci_fetch_assoc($ellenorzes);
+//    TRIGGERKENT MEGVALOSITVA    |
+//    ------------------------    v
+//    prevent_duplicate_album.sql
+//
+//    $ellenorzes = oci_parse($conn, "SELECT COUNT(*) AS CNT FROM FENYKEPALBUM WHERE NEV = :nev AND FELHASZNALO_FELHASZNALONEV = :fnev");
+//    oci_bind_by_name($ellenorzes, ":nev", $nev);
+//    oci_bind_by_name($ellenorzes, ":fnev", $felhasznalonev);
+//    oci_execute($ellenorzes);
+//    $row = oci_fetch_assoc($ellenorzes);
+//
+//    if ($row['CNT'] > 0) {
+//        $_SESSION['hiba'] = "Már van ilyen nevű albumod!";
+//        header("Location: " . BASE_URL . "pages/album.php");
+//        exit;
+//    }
 
-    if ($row['CNT'] > 0) {
-        $_SESSION['hiba'] = "Már van ilyen nevű albumod!";
-        header("Location: " . BASE_URL . "pages/album.php");
-        exit;
-    }
-
-    $stmt = oci_parse($conn, "
-                                    INSERT INTO FENYKEPALBUM (NEV, LEIRAS, FELHASZNALO_FELHASZNALONEV) 
-                                    VALUES (:nev, :leiras, :fnev) RETURNING ID INTO :uj_album_id
-                                    ");
+    $stmt = oci_parse($conn,
+        "INSERT INTO FENYKEPALBUM (NEV, LEIRAS, FELHASZNALO_FELHASZNALONEV) 
+                VALUES (:nev, :leiras, :fnev) RETURNING ID INTO :uj_album_id");
 
     oci_bind_by_name($stmt, ":nev", $nev);
     oci_bind_by_name($stmt, ":leiras", $leiras);
@@ -39,8 +42,10 @@ if ($_POST['muv'] === 'letrehozas') {
     if (oci_execute($stmt)) {
         $sorszam = 1;
         foreach ($valasztott_kepek as $kep_id) {
-            $kep_stmt = oci_parse($conn, "INSERT INTO KEPFENYKEPALBUM (KEP_ID, FENYKEPALBUM_ID, SORSZAM) 
-                                          VALUES (:kep_id, :album_id, :sorszam)");
+            $kep_stmt = oci_parse($conn, "
+            INSERT INTO KEPFENYKEPALBUM (KEP_ID, FENYKEPALBUM_ID, SORSZAM) 
+            VALUES (:kep_id, :album_id, :sorszam)
+        ");
             oci_bind_by_name($kep_stmt, ":kep_id", $kep_id);
             oci_bind_by_name($kep_stmt, ":album_id", $uj_album_id);
             oci_bind_by_name($kep_stmt, ":sorszam", $sorszam);
@@ -50,7 +55,12 @@ if ($_POST['muv'] === 'letrehozas') {
 
         $_SESSION['message'] = "Album létrehozva, képek hozzáadva!";
     } else {
-        $_SESSION['hiba'] = "Hiba az album létrehozásakor!";
+        $e = oci_error($stmt);
+        if (str_contains($e['message'], 'ORA-20001')) {
+            $_SESSION['hiba'] = "Már van ilyen nevű albumod!";
+        } else {
+            $_SESSION['hiba'] = "Hiba az album létrehozásakor!";
+        }
     }
 
     header("Location: " . BASE_URL . "pages/album.php");

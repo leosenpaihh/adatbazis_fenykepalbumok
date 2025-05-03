@@ -1,3 +1,4 @@
+-- ELjaras a fenykepek feltoltesere
 CREATE OR REPLACE PROCEDURE new_photo_upload(
     p_cim IN VARCHAR2,
     p_leiras IN CLOB,

@@ -37,7 +37,7 @@ if (isset($_SESSION['hiba'])) {
     <title>Albumok</title>
     <base href="<?php echo BASE_URL; ?>">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <link rel="icon" href="<?php echo BASE_URL; ?>styles/favicon.ico" type="image/ico">
 </head>
 <body>
@@ -51,12 +51,24 @@ if (isset($_SESSION['hiba'])) {
                 $album_found = true;
                 $album_id = $row['ID'];
 
-                $sql_fenykepek = "SELECT COUNT(*) AS fenykepek_szama FROM KEPFENYKEPALBUM WHERE FENYKEPALBUM_ID = :album_id";
-                $stid_fenykepek = oci_parse($conn, $sql_fenykepek);
-                oci_bind_by_name($stid_fenykepek, ':album_id', $album_id);
-                oci_execute($stid_fenykepek);
-                $fenykepek_row = oci_fetch_assoc($stid_fenykepek);
-                $fenykepek_szama = $fenykepek_row['FENYKEPEK_SZAMA'];
+//    FUGGVENYKENT MEGVALOSITVA    |
+//    ------------------------     v
+//    img_count_in_albums.sql
+//
+//                $sql_fenykepek = "SELECT COUNT(*) AS fenykepek_szama FROM KEPFENYKEPALBUM WHERE FENYKEPALBUM_ID = :album_id";
+//                $stid_fenykepek = oci_parse($conn, $sql_fenykepek);
+//                oci_bind_by_name($stid_fenykepek, ':album_id', $album_id);
+//                oci_execute($stid_fenykepek);
+//                $fenykepek_row = oci_fetch_assoc($stid_fenykepek);
+//                $fenykepek_szama = $fenykepek_row['FENYKEPEK_SZAMA'];
+                $sql_fuggveny = "BEGIN :szam := img_count_in_albums(:album_id); END;";
+                $stid_fuggveny = oci_parse($conn, $sql_fuggveny);
+
+                oci_bind_by_name($stid_fuggveny, ':album_id', $album_id);
+                oci_bind_by_name($stid_fuggveny, ':szam', $fenykepek_szama, 32);
+
+                oci_execute($stid_fuggveny);
+
 
                 $sql_images = "SELECT k.id, k.cim 
                                FROM Kep k
@@ -108,7 +120,8 @@ if (isset($_SESSION['hiba'])) {
                             ?>
                             <form action="<?php echo BASE_URL; ?>controllers/album_list_handler.php" method="post"
                                   style="display:inline-block;" class="location_torles">
-                                <input type="hidden" name="album_owner" value="<?= htmlspecialchars($row['FELHASZNALO_FELHASZNALONEV']) ?>">
+                                <input type="hidden" name="album_owner"
+                                       value="<?= htmlspecialchars($row['FELHASZNALO_FELHASZNALONEV']) ?>">
                                 <input type="hidden" name="album_id" value="<?= htmlspecialchars($row['ID']) ?>">
                                 <button type="submit" name="edit" class="edit-button">
                                     <span class="material-symbols-outlined">edit</span>

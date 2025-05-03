@@ -12,4 +12,7 @@ Minden, a telepítéshez és konfigurációhoz szükséges információ megtalá
 - `config.php`
 - `db.php`
 
-fájlokban.  
+fájlokban.
+
+Triggerek, eljárások és függvények külön `.sql` fájlban szerepelnek, 
+importálásuk `sqldeveloperben` szükséges használat előtt a megfelelő működéshez.

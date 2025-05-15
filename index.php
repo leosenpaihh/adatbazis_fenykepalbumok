@@ -132,6 +132,19 @@ $stid = oci_parse($conn, $queryPopular);
 oci_execute($stid);
 $popular = oci_fetch_assoc($stid);
 
+$queryBestCategory = "SELECT 
+                 k.kategoria_nev,
+                 COUNT(kk.ID) AS kep_darab,
+                 ROUND(AVG(e.pontszam), 2) AS atlag_ertekeles
+                 FROM KepKategoria k
+                 JOIN Kep kk ON k.kep_id = kk.id
+                 LEFT JOIN Ertekeles e ON kk.id = e.kep_id
+                 GROUP BY k.kategoria_nev
+                 ORDER BY kep_darab DESC";
+
+$stidBC = oci_parse($conn, $queryBestCategory);
+oci_execute($stidBC);
+$bestCategory = oci_fetch_assoc($stidBC);
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -142,7 +155,7 @@ $popular = oci_fetch_assoc($stid);
     <link rel="icon" href="styles/favicon.ico" type="image/ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <base href="<?php echo BASE_URL; ?>">
 </head>
 <body>
@@ -180,7 +193,8 @@ include __DIR__ . '/pages/shared/menu.php';
                 ?>
                 <li>
                     <a href="?telepules=<?= urlencode($telepules['TELEPULES']) ?>" class="<?= $isActive ?>">
-                        <?= htmlspecialchars($telepules['TELEPULES']) ?> (<?= htmlspecialchars($telepules['FOTO_SZAM']) ?>)
+                        <?= htmlspecialchars($telepules['TELEPULES']) ?>
+                        (<?= htmlspecialchars($telepules['FOTO_SZAM']) ?>)
                     </a>
                 </li>
             <?php endforeach; ?>
@@ -196,7 +210,8 @@ include __DIR__ . '/pages/shared/menu.php';
                 ?>
                 <li>
                     <a href="?kategoria=<?= urlencode($kategoria['KATEGORIA_NEV']) ?>" class="<?= $isActive ?>">
-                        <?= htmlspecialchars($kategoria['KATEGORIA_NEV']) ?> (<?= htmlspecialchars($kategoria['FOTO_SZAM']) ?>)
+                        <?= htmlspecialchars($kategoria['KATEGORIA_NEV']) ?>
+                        (<?= htmlspecialchars($kategoria['FOTO_SZAM']) ?>)
                     </a>
                 </li>
             <?php endforeach; ?>
@@ -224,7 +239,8 @@ include __DIR__ . '/pages/shared/menu.php';
                 ?>
                 <li>
                     <a href="?telepules=<?= urlencode($telepules['TELEPULES']) ?>" class="<?= $isActive ?>">
-                        <?= htmlspecialchars($telepules['TELEPULES']) ?> (<?= htmlspecialchars($telepules['FOTO_SZAM']) ?>)
+                        <?= htmlspecialchars($telepules['TELEPULES']) ?>
+                        (<?= htmlspecialchars($telepules['FOTO_SZAM']) ?>)
                     </a>
                 </li>
             <?php endforeach; ?>
@@ -239,7 +255,8 @@ include __DIR__ . '/pages/shared/menu.php';
                 ?>
                 <li>
                     <a href="?kategoria=<?= urlencode($kategoria['KATEGORIA_NEV']) ?>" class="<?= $isActive ?>">
-                        <?= htmlspecialchars($kategoria['KATEGORIA_NEV']) ?> (<?= htmlspecialchars($kategoria['FOTO_SZAM']) ?>)
+                        <?= htmlspecialchars($kategoria['KATEGORIA_NEV']) ?>
+                        (<?= htmlspecialchars($kategoria['FOTO_SZAM']) ?>)
                     </a>
                 </li>
             <?php endforeach; ?>
@@ -260,6 +277,27 @@ include __DIR__ . '/pages/shared/menu.php';
             <?php else: ?>
                 <li>
                     <a href="#">Nincs népszerű úticél</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </div>
+    <div class="box">
+        <h3>Legnépszerűbb kategória</h3>
+        <ul>
+            <?php if ($bestCategory): ?>
+                <?php
+                $isActive = (isset($_GET['kategoria']) && $_GET['kategoria'] === $bestCategory['KATEGORIA_NEV']) ? 'active' : '';
+                ?>
+                <li>
+                    <a href="?kategoria=<?= urlencode($bestCategory['KATEGORIA_NEV']) ?>" class="<?= $isActive ?>">
+                        <?= htmlspecialchars($bestCategory['KATEGORIA_NEV']) ?>
+                        (<?= htmlspecialchars($bestCategory['KEP_DARAB']) ?>
+                        <?= htmlspecialchars($bestCategory['ATLAG_ERTEKELES']) ?>★)
+                    </a>
+                </li>
+            <?php else: ?>
+                <li>
+                    <a href="#">Nincs adat kategóriákhoz</a>
                 </li>
             <?php endif; ?>
         </ul>
@@ -285,7 +323,9 @@ include __DIR__ . '/pages/shared/menu.php';
                     <p><strong>Cím:</strong> <?= htmlspecialchars($img['CIM']) ?></p>
                     <p><strong>Feltöltötte:</strong> <?= htmlspecialchars($img['FELHASZNALO_FELHASZNALONEV']) ?></p>
                     <p><strong>Feltöltési dátum:</strong> <?= htmlspecialchars($img['FELTOLTESI_DATUM']) ?></p>
-                    <p><strong>Település:</strong> <?= htmlspecialchars($img['TELEPULES_NEV'] ?? 'Nincs település hozzárendelve') ?></p>
+                    <p>
+                        <strong>Település:</strong> <?= htmlspecialchars($img['TELEPULES_NEV'] ?? 'Nincs település hozzárendelve') ?>
+                    </p>
                     <p><strong>Kategóriák:</strong> <?= htmlspecialchars($img['KATEGORIANK']) ?></p>
                     <p><strong>Leírás:</strong>
                         <?php
@@ -309,15 +349,16 @@ include __DIR__ . '/pages/shared/menu.php';
                                 <i class="fa-solid fa-star rating-preview rating-preview-gray"></i>
                             <?php endif; ?>
                         <?php } ?>
-                    <?php endif ; ?>
-                    <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
-                        <form action="controllers/delete_handler.php" method="post" onsubmit="return confirm('Biztosan törölni szeretnéd a képet?');" class="location_torles">
-                            <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">
-                    <button type="submit" class="delete-button">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                </form>
-                    <?php endif; ?>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['felhasznalo']['felhasznalonev'] == $img['FELHASZNALO_FELHASZNALONEV']): ?>
+                    <form action="controllers/delete_handler.php" method="post"
+                          onsubmit="return confirm('Biztosan törölni szeretnéd a képet?');" class="location_torles">
+                        <input type="hidden" name="kep_id" value="<?= htmlspecialchars($img['ID']) ?>">
+                        <button type="submit" class="delete-button">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                    </form>
+                <?php endif; ?>
                 </div>
             </div>
         <?php endforeach; ?>

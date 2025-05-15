@@ -1,7 +1,6 @@
 <?php
 require_once '../includes/base.php';
 session_start();
-include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
@@ -57,6 +56,18 @@ oci_execute($stid_images);
 
 </head>
 <body>
+
+<?php
+include __DIR__ . '/shared/menu.php';
+?>
+<button class="menu-toggle" onclick="toggleMenu()">☰ Menü</button>
+<script>
+    function toggleMenu() {
+        let nav = document.querySelector('nav');
+        nav.classList.toggle('active');
+    }
+</script>
+
 <h1>Album módosítása</h1>
 
 <form action="<?php echo BASE_URL; ?>controllers/album_edit_handler.php" method="post">

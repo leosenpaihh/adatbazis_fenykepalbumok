@@ -1,7 +1,6 @@
 <?php
 require_once '../includes/base.php';
 session_start();
-include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 if (empty($_SESSION['felhasznalo']) || $_SESSION['felhasznalo']['admin'] != 1) {
@@ -32,6 +31,17 @@ if (isset($_SESSION['hiba'])) {
     <base href="<?= BASE_URL ?>">
 </head>
 <body>
+
+<?php
+include __DIR__ . '/shared/menu.php';
+?>
+<button class="menu-toggle" onclick="toggleMenu()">☰ Menü</button>
+<script>
+    function toggleMenu() {
+        let nav = document.querySelector('nav');
+        nav.classList.toggle('active');
+    }
+</script>
 
 <div class="page-container">
     <div class="wrapper">

@@ -101,6 +101,15 @@ input[type="submit"]:hover {
     text-decoration: none;
 }
 
+@media (max-width: 768px) {
+    .profile-button {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px; /* kis térköz az alatta lévő gomb előtt */
+        text-align: center;
+    }
+}
+
 .profile-button:hover{
     background-color: #555;
 }
@@ -481,6 +490,48 @@ select:focus {
     border-radius: 4px;
 }
 
+/* Mobilnézet */
+@media screen and (max-width: 768px) {
+    .album-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* mindig 3 album egymás mellett */
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .album-box {
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    .album-images {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* képek 3 oszlopban */
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .album-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .album-container {
+        grid-template-columns: repeat(3, 1fr); /* maradjon 3 oszlop még mobilon is */
+        padding: 10px;
+    }
+
+    .album-images {
+        grid-template-columns: repeat(3, 1fr); /* képek maradnak 3 oszlopban */
+    }
+}
+
 /* Értékelés */
 
 .rating {
@@ -595,4 +646,265 @@ table.location-table input[type="submit"]:hover {
     margin: 0;
     padding: 0;
     background-color: transparent;
+}
+
+/* Reszponzív stílusok mobil nézethez */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    /* Fejléc mobil nézethez */
+    h1 {
+        font-size: 1.6em;
+        margin-bottom: 10px;
+    }
+
+    /* Navigációs menü függőleges elrendezés */
+    nav {
+        display: block;
+        text-align: center;
+    }
+
+    nav a {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Profilkártyák */
+    .profile-card {
+        padding: 10px 15px;
+        width: 100%;
+    }
+
+    /* Galéria elemek mobil nézethez */
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item {
+        padding: 10px;
+    }
+
+    /* Dobozok */
+    .box {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .grid-container-xd {
+        grid-template-columns: 1fr; /* Egy oszlopos elrendezés */
+    }
+
+    /* Albumok */
+    .album-container {
+        display: block;
+        padding: 0;
+    }
+
+    .album-box {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Képek */
+    .gallery-item img, .profile-card img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Ikonok */
+    .material-symbols-outlined {
+        font-size: 20px;
+    }
+
+    /* Logó */
+    .logo-container {
+        margin-bottom: 10px;
+    }
+
+    .logo {
+        width: 80%;  /* Kisebb logó mobil nézetben */
+        height: auto;
+    }
+}
+
+/* Tablet nézet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .gallery-container {
+        grid-template-columns: repeat(2, 1fr); /* Két oszlopos elrendezés */
+    }
+
+    .album-box {
+        width: 48%;
+    }
+}
+
+/* Mobil nézethez */
+@media (max-width: 768px) {
+
+    /* Sidebar rejtése, ha kis képernyő van */
+    .sidebar {
+        display: none;
+    }
+
+    /* Menü ikon megjelenítése mobilon */
+    .menu-toggle {
+        display: block;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    /* Galéria konténer */
+    .gallery-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .gallery-item {
+        background-color: #fff;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .metadata {
+        padding: 10px;
+    }
+
+    /* A képek adatainak jobban olvashatóvá tétele mobil nézetben */
+    .metadata p {
+        font-size: 14px;
+    }
+
+    /* Oldal alja */
+    footer {
+        text-align: center;
+        padding: 20px;
+    }
+}
+
+/* Extra mobil nézetek */
+@media (max-width: 480px) {
+
+    /* A galéria oszlopok egyetlen oszlopra csoportosítása */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Csökkentsük a képek közötti távolságot */
+    .gallery-item {
+        margin-bottom: 10px;
+    }
+}
+
+/* Alapértelmezés: minden el van rejtve (asztali nézet) */
+.filter-toggle-btn,
+.filter-boxes {
+    display: none;
+}
+
+/* Telefonos nézet – csak itt jelenjen meg a gomb és a doboz */
+@media screen and (max-width: 768px) {
+    .filter-toggle-btn {
+        display: block;
+        padding: 10px;
+        background-color: #ddd;
+        border: none;
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .filter-boxes {
+        display: none; /* alapból rejtve, JS-sel lesz toggolva */
+        margin-top: 10px;
+    }
+
+    .filter-boxes.active {
+        display: block;
+    }
+}
+
+/* Telefonos nézet */
+@media screen and (max-width: 768px) {
+    .gallery-container {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0 10px;  /* A galéria bal és jobb oldali paddingja */
+        width: 100%;  /* Biztosítjuk, hogy a galéria konténer 100%-ban kitöltse a képernyőt */
+        box-sizing: border-box;  /* A padding is bele számítson a szélességbe */
+    }
+
+    .gallery-grid {
+        display: grid;  /* A grid layout használata */
+        grid-template-columns: repeat(2, 1fr); /* Két oszlopra váltunk */
+        gap: 10px; /* A kártyák közötti távolság */
+        justify-items: center; /* Kártyák középre igazítása oszlopon belül */
+    }
+
+    .gallery-item {
+        width: 100%;  /* A galéria elemek szélességét 100%-ra állítjuk */
+        box-sizing: border-box;  /* A padding bele számít a szélességbe */
+    }
+
+    .gallery-item img {
+        width: 100%;  /* Kép szélessége 100%, hogy kitöltse az oszlopot */
+        height: auto; /* Az arányok megőrzése érdekében a magasság automatikusan beáll */
+        display: block;  /* A képek sorbarendezése */
+        object-fit: cover;  /* A képek arányainak megtartása, ha szükséges */
+    }
+}
+
+/* A gomb alapértelmezésben el van rejtve */
+.menu-toggle {
+    display: none;
+}
+/* Mobilos nézet – alapértelmezett elrejtés */
+@media screen and (max-width: 768px) {
+    /* A menüt alapból elrejtjük */
+    nav {
+        display: none;
+    }
+
+    /* A gomb megjelenítése mobilon */
+    .menu-toggle {
+        display: block;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        border: none;
+        font-size: 18px;
+        width: 100%;
+    }
+
+    /* Dropdown menü a mobilos nézetben */
+    nav .dropdown-content {
+        position: static;
+        background-color: #f1f1f1;
+        box-shadow: none;
+    }
+
+    nav .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Menüpontok megjelenítése mobilon */
+    nav.active {
+        display: block;
+    }
 }

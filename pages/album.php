@@ -1,7 +1,6 @@
 <?php
 require_once '../includes/base.php';
 session_start();
-include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
@@ -27,8 +26,9 @@ if (isset($_SESSION['message'])) {
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <meta charset="UTF-8">
     <title>Album létrehozása</title>
-    <base href="http://localhost/adatbazis_fenykepalbumok/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../styles/favicon.ico" type="image/ico">
+    <base href="<?= BASE_URL ?>">
 </head>
 <body>
 <?php
@@ -43,6 +43,17 @@ $kep_lekerdezes = oci_parse($conn,
 oci_bind_by_name($kep_lekerdezes, ":fnev", $felhasznalonev);
 oci_execute($kep_lekerdezes);
 ?>
+
+<?php
+include __DIR__ . '/shared/menu.php';
+?>
+<button class="menu-toggle" onclick="toggleMenu()">☰ Menü</button>
+<script>
+    function toggleMenu() {
+        let nav = document.querySelector('nav');
+        nav.classList.toggle('active');
+    }
+</script>
 
 <div class="page-container">
     <div class="wrapper">

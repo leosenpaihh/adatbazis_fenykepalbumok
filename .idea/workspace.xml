@@ -4,11 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="Yet again some button fixes...">
+    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="Final step, editing the README">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/delete_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/delete_handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/triggers/delete_comments.sql" beforeDir="false" afterPath="$PROJECT_DIR$/docs/triggers/delete_comments_compound.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/db.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin_panel.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin_panel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/album.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/album_edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album_edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/album_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album_list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/album_preview.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/album_preview.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/location.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/location.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/photo.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/photo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/photo_review.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/photo_review.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile_created_albums.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile_created_albums.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile_upload_photos.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile_upload_photos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/registration.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/registration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/statistics.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/statistics.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,18 +47,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "leosenpaihh"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;leosenpaihh&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/leosenpaihh/adatbazis_fenykepalbumok.git",
-    "accountId": "c609dde1-a4e3-48e4-b07d-95c7657b94d4"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/leosenpaihh/adatbazis_fenykepalbumok.git&quot;,
+    &quot;accountId&quot;: &quot;c609dde1-a4e3-48e4-b07d-95c7657b94d4&quot;
   }
-}]]></component>
+}</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP">
     <include_path>
       <path value="$PROJECT_DIR$/../../../../../instantclient_23_7" />
@@ -68,7 +86,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -118,7 +136,11 @@
       <workItem from="1745578715521" duration="145000" />
       <workItem from="1745580263109" duration="48888000" />
       <workItem from="1745749578526" duration="5076000" />
-      <workItem from="1745763933068" duration="13190000" />
+      <workItem from="1745763933068" duration="15923000" />
+      <workItem from="1746369949034" duration="13954000" />
+      <workItem from="1746635041193" duration="2073000" />
+      <workItem from="1746640696385" duration="13361000" />
+      <workItem from="1747318111237" duration="1297000" />
     </task>
     <task id="LOCAL-00001" summary="Updating the main site and additional changes">
       <option name="closed" value="true" />
@@ -224,11 +246,22 @@
       <option name="project" value="LOCAL" />
       <updated>1745783283143</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Final step, editing the README">
+      <option name="closed" value="true" />
+      <created>1745787308856</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1745787308856</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.db" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ID_ORDER">
@@ -272,7 +305,8 @@
     <MESSAGE value="Album preview, fixing album elements" />
     <MESSAGE value="Adding icons, fixing the category/location style" />
     <MESSAGE value="Yet again some button fixes..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Yet again some button fixes..." />
+    <MESSAGE value="Final step, editing the README" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final step, editing the README" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

@@ -1,7 +1,6 @@
 <?php
 require_once '../includes/base.php';
 session_start();
-include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
@@ -32,6 +31,17 @@ while ($row = oci_fetch_assoc($stid)) {
 
 </head>
 <body>
+
+<?php
+include __DIR__ . '/shared/menu.php';
+?>
+<button class="menu-toggle" onclick="toggleMenu()">☰ Menü</button>
+<script>
+    function toggleMenu() {
+        let nav = document.querySelector('nav');
+        nav.classList.toggle('active');
+    }
+</script>
 
 <div class="profile-card">
     <h1>Felhasználói adataid</h1>

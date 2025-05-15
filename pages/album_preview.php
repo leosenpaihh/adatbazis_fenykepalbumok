@@ -2,7 +2,6 @@
 
 require_once '../includes/base.php';
 session_start();
-include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 ini_set('display_errors', 1);
@@ -77,6 +76,19 @@ oci_execute($stid_images);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+<?php
+include __DIR__ . '/shared/menu.php';
+?>
+<button class="menu-toggle" onclick="toggleMenu()">☰ Menü</button>
+<script>
+    function toggleMenu() {
+        let nav = document.querySelector('nav');
+        nav.classList.toggle('active');
+    }
+</script>
+
+
 <div class="page-container">
     <div class="wrapper">
         <div class="album-title-preview"><?= htmlspecialchars($album['NEV'], ENT_QUOTES) ?></div>

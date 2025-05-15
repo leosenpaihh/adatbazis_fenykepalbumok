@@ -1,7 +1,6 @@
 <?php
 require_once '../includes/base.php';
 session_start();
-include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 if (!isset($_SESSION['felhasznalo'])) {
@@ -44,6 +43,18 @@ while ($row = oci_fetch_assoc($stid)) {
     <base href="<?php echo BASE_URL; ?>">
 </head>
 <body>
+
+<?php
+include __DIR__ . '/shared/menu.php';
+?>
+<button class="menu-toggle" onclick="toggleMenu()">☰ Menü</button>
+<script>
+    function toggleMenu() {
+        let nav = document.querySelector('nav');
+        nav.classList.toggle('active');
+    }
+</script>
+
 <h1>Kategória létrehozása</h1>
 
 <form action="<?php echo BASE_URL; ?>controllers/category_handler.php" method="post">

@@ -1,7 +1,6 @@
 <?php
 require_once '../includes/base.php';
 session_start();
-include __DIR__ . '/shared/menu.php';
 include('../includes/db.php');
 
 // OCILob objektum stringgé alakítása
@@ -127,6 +126,18 @@ if (isset($_SESSION['felhasznalo'])) {
     </script>
 </head>
 <body>
+
+<?php
+include __DIR__ . '/shared/menu.php';
+?>
+<button class="menu-toggle" onclick="toggleMenu()">☰ Menü</button>
+<script>
+    function toggleMenu() {
+        let nav = document.querySelector('nav');
+        nav.classList.toggle('active');
+    }
+</script>
+
 <div class="page-container">
     <div class="wrapper">
         <div class="photo-review-container">
@@ -189,7 +200,7 @@ if (isset($_SESSION['felhasznalo'])) {
                 <button type="submit">Hozzászólás küldése</button>
             </form>
         <?php else: ?>
-            <p><a href="login.php">Jelentkezz be</a> hozzászóláshoz!</p>
+            <p><a href="pages/login.php">Jelentkezz be</a> hozzászóláshoz!</p>
         <?php endif; ?>
 
         <!-- Hozzászólások -->

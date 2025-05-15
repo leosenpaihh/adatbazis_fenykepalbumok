@@ -6,7 +6,7 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['kep_id'])) {
     $kepId = (int)$_POST['kep_id'];
 
-    // Először ellenőrizzük, hogy a bejelentkezett user töltheti-e
+    // Először ellenőrizzük, hogy a bejelentkezett user törölheti-e a képet
     $query = "SELECT FELHASZNALO_FELHASZNALONEV FROM Kep WHERE ID = :id";
     $stid = oci_parse($conn, $query);
     oci_bind_by_name($stid, ':id', $kepId);
@@ -27,7 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['kep_id'])) {
     $deleteQuery = "DELETE FROM Kep WHERE ID = :id";
     $deleteStid = oci_parse($conn, $deleteQuery);
     oci_bind_by_name($deleteStid, ':id', $kepId);
-    oci_execute($deleteStid);
+
+    // Az OCI_COMMIT_ON_SUCCESS kapcsolóval automatikusan elmentjük a változtatást
+    $result = oci_execute($deleteStid, OCI_COMMIT_ON_SUCCESS);
+    if (!$result) {
+        $error = oci_error($deleteStid);
+        echo "Hiba történt a törlés során: " . $error['message'];
+        exit;
+    }
 
     // Sikeres törlés után visszairányítunk
     header("Location: ../index.php");

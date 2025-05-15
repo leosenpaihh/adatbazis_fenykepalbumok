@@ -158,6 +158,59 @@ $popular = oci_fetch_assoc($stid);
 <?php
 include __DIR__ . '/pages/shared/menu.php';
 ?>
+<button class="menu-toggle" onclick="toggleMenu()">☰ Menü</button>
+<script>
+    function toggleMenu() {
+        let nav = document.querySelector('nav');
+        nav.classList.toggle('active');
+    }
+</script>
+
+<!-- 📱 Csak mobilon látható gomb -->
+<button class="filter-toggle-btn" onclick="toggleFilters()">Szűrők megjelenítése</button>
+
+<!-- 📦 Szűrődobozok (mindkét lista itt van) -->
+<div class="filter-boxes" id="filterBoxes">
+    <div class="box">
+        <h3>Települések</h3>
+        <ul>
+            <?php foreach ($telepulesek as $telepules): ?>
+                <?php
+                $isActive = (isset($_GET['telepules']) && $_GET['telepules'] === $telepules['TELEPULES']) ? 'active' : '';
+                ?>
+                <li>
+                    <a href="?telepules=<?= urlencode($telepules['TELEPULES']) ?>" class="<?= $isActive ?>">
+                        <?= htmlspecialchars($telepules['TELEPULES']) ?> (<?= htmlspecialchars($telepules['FOTO_SZAM']) ?>)
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h3>Kategóriák</h3>
+        <ul>
+            <?php foreach ($kategoriak as $kategoria): ?>
+                <?php
+                $isActive = (isset($_GET['kategoria']) && $_GET['kategoria'] === $kategoria['KATEGORIA_NEV']) ? 'active' : '';
+                ?>
+                <li>
+                    <a href="?kategoria=<?= urlencode($kategoria['KATEGORIA_NEV']) ?>" class="<?= $isActive ?>">
+                        <?= htmlspecialchars($kategoria['KATEGORIA_NEV']) ?> (<?= htmlspecialchars($kategoria['FOTO_SZAM']) ?>)
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+
+<script>
+    function toggleFilters() {
+        const box = document.getElementById('filterBoxes');
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
 
 <!-- Main Content -->
 
@@ -248,7 +301,7 @@ include __DIR__ . '/pages/shared/menu.php';
                         ?>
                     </p>
                     <?php if (isset($_SESSION['felhasznalo']) && isset($prErtekelesek[$img['ID']])): ?>
-                    <p><strong>Értékelésed:</strong>
+                    <p><strong>Értékelésed:<br></strong>
                         <?php for ($i = 0; $i < 5; $i++) { ?>
                             <?php if ($i < $prErtekelesek[$img['ID']]): ?>
                                 <i class="fa-solid fa-star rating-preview"></i>

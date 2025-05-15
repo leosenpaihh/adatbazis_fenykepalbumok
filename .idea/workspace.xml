@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="Final step, editing the README">
+    <list default="true" id="7fcccd7c-bc88-4f89-86ad-e5f5ed85f94e" name="Changes" comment="Fixing and replacing the trigger, adding number type array for comment id, making the site more compatible desktop/mobile">
+      <change afterPath="$PROJECT_DIR$/docs/types/number_ntt.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/delete_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/delete_handler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/triggers/delete_comments.sql" beforeDir="false" afterPath="$PROJECT_DIR$/docs/triggers/delete_comments_compound.sql" afterDir="false" />
@@ -140,7 +141,7 @@
       <workItem from="1746369949034" duration="13954000" />
       <workItem from="1746635041193" duration="2073000" />
       <workItem from="1746640696385" duration="13361000" />
-      <workItem from="1747318111237" duration="1297000" />
+      <workItem from="1747318111237" duration="1608000" />
     </task>
     <task id="LOCAL-00001" summary="Updating the main site and additional changes">
       <option name="closed" value="true" />
@@ -306,7 +307,8 @@
     <MESSAGE value="Adding icons, fixing the category/location style" />
     <MESSAGE value="Yet again some button fixes..." />
     <MESSAGE value="Final step, editing the README" />
-    <option name="LAST_COMMIT_MESSAGE" value="Final step, editing the README" />
+    <MESSAGE value="Fixing and replacing the trigger, adding number type array for comment id, making the site more compatible desktop/mobile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing and replacing the trigger, adding number type array for comment id, making the site more compatible desktop/mobile" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
